@@ -16,9 +16,9 @@ namespace BLL.Impl
             this._generorepository = generorepository;
         }
 
-        public Task Create(GeneroDTO genero)
+        public async Task Create(GeneroDTO genero)
         {
-            throw new NotImplementedException();
+            await _generorepository.Create(genero);
         }
 
         public Task Delete(GeneroDTO genero)

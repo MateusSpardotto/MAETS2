@@ -16,9 +16,18 @@ namespace DAO.Impl
             this._context = context;
         }
 
-        public Task Create(GeneroDTO genero)
+        public async Task Create(GeneroDTO genero)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _context.Generos.Add(genero);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro no banco de dados");
+            }
+
         }
 
         public Task Delete(GeneroDTO genero)

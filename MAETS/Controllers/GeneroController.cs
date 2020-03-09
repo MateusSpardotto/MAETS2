@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using DAO.Interfaces;
+using DTO;
 using Microsoft.AspNetCore.Mvc;
+using MVCWebPresentationLayer.Models;
 
 namespace MVCWebPresentationLayer.Controllers.Genero
 {
@@ -22,10 +25,21 @@ namespace MVCWebPresentationLayer.Controllers.Genero
         }
 
         [HttpPost]
+        public async Task<IActionResult> Create(GeneroInsertViewModel viewModel)
+        {
+            var configuration = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<GeneroInsertViewModel, GeneroDTO>();
+            });
+            IMapper mapper = configuration.CreateMapper();
+            GeneroDTO genero = mapper.Map<GeneroDTO>(viewModel);
+            await _generoService.Create(genero);
+
+            return View();
+        }
+
         public IActionResult Create()
         {
-            _generoService.Create(new DTO.GeneroDTO());
-
             return View();
         }
     }
