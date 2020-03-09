@@ -22,7 +22,7 @@ namespace DAO.Impl
             {
                 _context.Generos.Add(genero);
                 await _context.SaveChangesAsync();
-            }
+             }
             catch (Exception ex)
             {
                 throw new Exception("Erro no banco de dados");

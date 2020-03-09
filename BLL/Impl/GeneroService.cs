@@ -1,5 +1,7 @@
-﻿using DAO.Interfaces;
+﻿using BLL.Validators;
+using DAO.Interfaces;
 using DTO;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,6 +20,16 @@ namespace BLL.Impl
 
         public async Task Create(GeneroDTO genero)
         {
+            ValidationResult result = new GeneroValidator().Validate(genero);
+            if (!result.IsValid)
+            {
+                List<string> Erros = new List<string>();
+                foreach(var erro in result.Errors)
+                {
+                    Erros.Add("Campo: " + erro.PropertyName + " Erro: " + erro.ErrorMessage);
+                }
+            }
+
             await _generorepository.Create(genero);
         }
 
