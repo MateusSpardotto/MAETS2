@@ -6,17 +6,17 @@ using AutoMapper;
 using DAO.Interfaces;
 using DTO;
 using Microsoft.AspNetCore.Mvc;
-using MVCWebPresentationLayer.Models;
+using MVCWebPresentationLayer.Models.Insert;
 
-namespace MVCWebPresentationLayer.Controllers.Genero
+namespace MVCWebPresentationLayer.Controllers
 {
-    public class GeneroController : Controller
+    public class JogoController : Controller
     {
-        private IGeneroService _generoService; 
+        private IJogoService _jogoService;
 
-        public GeneroController(IGeneroService generoService)
+        public JogoController(IJogoService jogoService)
         {
-            this._generoService = generoService;
+            this._jogoService = jogoService;
         }
 
         public IActionResult Index()
@@ -25,15 +25,15 @@ namespace MVCWebPresentationLayer.Controllers.Genero
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(GeneroInsertViewModel viewModel)
+        public async Task<IActionResult> Create(JogoInsertViewModel viewModel)
         {
             var configuration = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<GeneroInsertViewModel, GeneroDTO>();
+                cfg.CreateMap<DesenvolvedorInsertViewModel, JogoDTO>();
             });
             IMapper mapper = configuration.CreateMapper();
-            GeneroDTO genero = mapper.Map<GeneroDTO>(viewModel);
-            await _generoService.Create(genero);
+            JogoDTO jogo = mapper.Map<JogoDTO>(viewModel);
+            await _jogoService.Create(jogo);
 
             return View();
         }

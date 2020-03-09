@@ -1,0 +1,46 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
+using DAO.Interfaces;
+using DTO;
+using Microsoft.AspNetCore.Mvc;
+using MVCWebPresentationLayer.Models.Insert;
+
+namespace MVCWebPresentationLayer.Controllers
+{
+    public class DesenvolvedorController : Controller
+    {
+        private IDesenvolvedorService _desenvolvedorService;
+
+        public DesenvolvedorController(IDesenvolvedorService desenvolvedorService)
+        {
+            this._desenvolvedorService = desenvolvedorService;
+        }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(DesenvolvedorInsertViewModel viewModel)
+        {
+            var configuration = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<DesenvolvedorInsertViewModel, DesenvolvedorDTO>();
+            });
+            IMapper mapper = configuration.CreateMapper();
+            DesenvolvedorDTO desenvolvedor = mapper.Map<DesenvolvedorDTO>(viewModel);
+            await _desenvolvedorService.Create(desenvolvedor);
+
+            return View();
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+    }
+}
