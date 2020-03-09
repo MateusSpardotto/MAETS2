@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BLL.Impl;
 using BLL.Interfaces;
 using DAO;
+using DAO.Impl;
 using DAO.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,10 +34,17 @@ namespace MAETS
             services.AddControllersWithViews();
             services.AddDbContextPool<MContext>(options => options.UseSqlServer(this.Configuration["ConnectionStrings"]));
 
-
             services.AddTransient<IUsuarioService, UsuarioService>();
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
-        
+
+            services.AddTransient<IDesenvolvedorService, DesenvolvedorService>();
+            services.AddTransient<IDesenvolvedorRepository, DesenvolvedorRepository>();
+
+            services.AddTransient<IGeneroService, GeneroService>();
+            services.AddTransient<IGeneroRepository, GeneroRepository>();
+
+            services.AddTransient<IJogoService, JogoService>();
+            services.AddTransient<IJogoRepository, JogoRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
