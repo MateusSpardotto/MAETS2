@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Common;
 using DAO.Interfaces;
 using DTO;
 using Microsoft.AspNetCore.Mvc;
@@ -27,13 +28,26 @@ namespace MVCWebPresentationLayer.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(DesenvolvedorInsertViewModel viewModel)
         {
-            var configuration = new MapperConfiguration(cfg =>
+            try
             {
-                cfg.CreateMap<DesenvolvedorInsertViewModel, DesenvolvedorDTO>();
-            });
-            IMapper mapper = configuration.CreateMapper();
-            DesenvolvedorDTO desenvolvedor = mapper.Map<DesenvolvedorDTO>(viewModel);
-            await _desenvolvedorService.Create(desenvolvedor);
+                var configuration = new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<DesenvolvedorInsertViewModel, DesenvolvedorDTO>();
+                });
+                IMapper mapper = configuration.CreateMapper();
+                DesenvolvedorDTO desenvolvedor = mapper.Map<DesenvolvedorDTO>(viewModel);
+                await _desenvolvedorService.Create(desenvolvedor);
+
+                return View();
+            }
+            catch (MSException ex)
+            {
+                ViewBag.ValidationErrors = ex.Errors;
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = ex.Message;
+            }
 
             return View();
         }
