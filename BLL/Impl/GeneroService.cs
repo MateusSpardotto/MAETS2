@@ -1,4 +1,6 @@
 ﻿using BLL.Validators;
+using Common;
+using Common.Extensions;
 using DAO.Interfaces;
 using DTO;
 using FluentValidation.Results;
@@ -21,26 +23,19 @@ namespace BLL.Impl
         public async Task Create(GeneroDTO genero)
         {
             ValidationResult result = new GeneroValidator().Validate(genero);
-            if (!result.IsValid)
-            {
-                List<string> Erros = new List<string>();
-                foreach(var erro in result.Errors)
-                {
-                    Erros.Add("Campo: " + erro.PropertyName + " Erro: " + erro.ErrorMessage);
-                }
-            }
+            result.ThrowExceptionIfFail();
 
             await _generorepository.Create(genero);
         }
 
-        public Task Delete(GeneroDTO genero)
+        public async Task Delete(GeneroDTO genero)
         {
-            throw new NotImplementedException();
+            await _generorepository.Delete(genero);
         }
 
-        public Task<List<GeneroDTO>> GetGeneros()
+        public async Task<List<GeneroDTO>> GetGeneros()
         {
-            throw new NotImplementedException();
+            return await _generorepository.GetGeneros();
         }
 
         public Task Update(GeneroDTO genero)

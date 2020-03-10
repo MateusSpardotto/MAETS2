@@ -1,5 +1,8 @@
-﻿using DAO.Interfaces;
+﻿using BLL.Validators;
+using Common.Extensions;
+using DAO.Interfaces;
 using DTO;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,19 +18,22 @@ namespace BLL.Impl
             this._desenvolvedorrepository = desenvolvedorrepository;
         }
 
-        public Task Create(DesenvolvedorDTO desenvolvedor)
+        public async Task Create(DesenvolvedorDTO desenvolvedor)
         {
-            throw new NotImplementedException();
+            ValidationResult result = new DesenvolvedorValidator().Validate(desenvolvedor);
+            result.ThrowExceptionIfFail();
+
+            await _desenvolvedorrepository.Create(desenvolvedor);
         }
 
-        public Task Delete(DesenvolvedorDTO desenvolvedor)
+        public async Task Delete(DesenvolvedorDTO desenvolvedor)
         {
-            throw new NotImplementedException();
+            await _desenvolvedorrepository.Delete(desenvolvedor);
         }
 
-        public Task<List<DesenvolvedorDTO>> GetDesenvolvedores()
+        public async Task<List<DesenvolvedorDTO>> GetDesenvolvedores()
         {
-            throw new NotImplementedException();
+            return await _desenvolvedorrepository.GetDesenvolvedores();
         }
 
         public Task Update(DesenvolvedorDTO desenvolvedor)

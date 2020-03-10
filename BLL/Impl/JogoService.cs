@@ -1,5 +1,9 @@
-﻿using DAO.Interfaces;
+﻿using BLL.Validators;
+using Common;
+using Common.Extensions;
+using DAO.Interfaces;
 using DTO;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,19 +20,22 @@ namespace BLL.Impl
             this._jogorepository = jogorepository;
         }
 
-        public Task Create(JogoDTO jogo)
+        public async Task Create(JogoDTO jogo)
         {
-            throw new NotImplementedException();
+            ValidationResult result = new JogoValidator().Validate(jogo);
+            result.ThrowExceptionIfFail();
+
+            await _jogorepository.Create(jogo);
         }
 
-        public Task Delete(JogoDTO jogo)
+        public async Task Delete(JogoDTO jogo)
         {
-            throw new NotImplementedException();
+            await _jogorepository.Delete(jogo);
         }
 
-        public Task<List<JogoDTO>> GetJogos()
+        public async Task<List<JogoDTO>> GetJogos()
         {
-            throw new NotImplementedException();
+            return await _jogorepository.GetJogos();
         }
 
         public Task Update(JogoDTO jogo)
