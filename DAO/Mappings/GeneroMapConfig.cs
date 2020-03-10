@@ -14,8 +14,7 @@ namespace DAO.Mappings
             this.ToTable("GENEROS");
             this.Property(g => g.Nome)
                 .HasMaxLength(60)
-                .IsRequired()
-                .IsUnicode();
+                .IsRequired();
         }
     }
 }

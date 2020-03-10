@@ -12,8 +12,10 @@ namespace DTO
         public string Email { get; set; }
         public string Senha { get; set; }
         public string CPF { get; set; }
+        public string Pais { get; set; }
         public DateTime DataNascimento { get; set; }
         public TipoUsuario TipoUsuario { get; set; }
-        public string Pais { get; set; }
+        public virtual JogoDTO JogoDTO { get; set; }
+        public virtual ICollection<JogoDTO> Jogos { get; set; }
     }
 }
