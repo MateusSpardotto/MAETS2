@@ -17,5 +17,7 @@ namespace DTO
         public int GeneroDTOID { get; set; }
         public DateTime DataLancamento { get; set; }
         public string Especificacoes { get; set; }
+        public virtual UsuarioDTO UsuarioDTO { get; set; }
+        public virtual ICollection<UsuarioDTO> Usuarios { get; set; }
     }
 }

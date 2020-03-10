@@ -14,30 +14,28 @@ namespace DAO.Mappings
 
             this.Property(u => u.Nome)
                 .HasMaxLength(60)
-                .IsRequired()
-                .IsUnicode();
+                .IsRequired();
 
             this.Property(u => u.Email)
                 .HasMaxLength(60)
-                .IsRequired()
-                .IsUnicode();
+                .IsRequired();
             this.HasIndex(u => u.Email)
-                .IsUnique();
+                .IsUnique(true)
+                .HasName("UQ_USUARIO_EMAIL");
 
             this.Property(u => u.Senha)
                 .HasMaxLength(16)
-                .IsRequired()
-                .IsUnicode();
+                .IsRequired();
             this.HasIndex(u => u.Senha)
                 .GetHashCode();
 
             this.Property(u => u.CPF)
                 .IsFixedLength()
                 .HasMaxLength(14)
-                .IsRequired()
-                .IsUnicode();
+                .IsRequired();
             this.HasIndex(u => u.CPF)
-                .IsUnique();
+                .IsUnique(true)
+                .HasName("UQ_USUARIO_CPF");
 
             this.Property(u => u.DataNascimento)
                 .IsRequired()
@@ -45,8 +43,7 @@ namespace DAO.Mappings
 
             this.Property(u => u.Pais)
                 .HasMaxLength(80)
-                .IsRequired()
-                .IsUnicode();
+                .IsRequired();
         }
     }
 }
