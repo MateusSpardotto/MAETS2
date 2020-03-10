@@ -1,5 +1,6 @@
 ﻿using DAO.Interfaces;
 using DTO;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -30,14 +31,19 @@ namespace DAO.Impl
 
         }
 
-        public Task Delete(GeneroDTO genero)
+        public async Task Delete(GeneroDTO genero)
         {
-            throw new NotImplementedException();
+            GeneroDTO DbG = await _context.Generos.FirstOrDefaultAsync(g => g.ID == genero.ID);
+            if (DbG != null)
+            {
+                _context.Generos.Remove(genero);
+                await _context.SaveChangesAsync();
+            }
         }
 
-        public Task<List<GeneroDTO>> GetGeneros()
+        public async Task<List<GeneroDTO>> GetGeneros()
         {
-            throw new NotImplementedException();
+            return await _context.Generos.ToListAsync();
         }
 
         public Task Update(GeneroDTO genero)

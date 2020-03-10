@@ -14,13 +14,12 @@ namespace DAO.Mappings
 
             this.Property(d => d.Nome)
                 .HasMaxLength(150)
-                .IsRequired()
-                .IsUnicode();
+                .IsRequired();
 
-            this.Property(d => d.PaisOrigem)
+
+                this.Property(d => d.PaisOrigem)
                 .HasMaxLength(80)
-                .IsRequired()
-                .IsUnicode();
+                .IsRequired();
         }
     }
 }

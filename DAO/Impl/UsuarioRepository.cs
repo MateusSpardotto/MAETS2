@@ -2,6 +2,7 @@
 using DTO;
 using System;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,21 +18,37 @@ namespace DAO
             this._context = context;
         }
 
-
         public async Task<UsuarioDTO> Authenticate(string email, string password)
         {
-
-            throw new Exception();
+            UsuarioDTO user = await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == email && u.Senha == password); //Tio Celo flw sobre o ConfigureAwait(false);
+            if (user == null)
+            {
+                throw new Exception("Email e/ou senha inválidos");
+            }
+            return user;
         }
 
         public async Task Create(UsuarioDTO usuario)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _context.Usuarios.Add(usuario);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro no banco de dados");
+            }
         }
 
-        public Task Delete(UsuarioDTO usuario)
+        public async Task Delete(UsuarioDTO usuario)
         {
-            throw new NotImplementedException();
+            UsuarioDTO user = await _context.Usuarios.FirstOrDefaultAsync(u => u.ID == usuario.ID);
+            if(user != null)
+            {
+                _context.Usuarios.Remove(usuario);
+                await _context.SaveChangesAsync();
+            }
         }
 
         public Task Update(UsuarioDTO usuario)

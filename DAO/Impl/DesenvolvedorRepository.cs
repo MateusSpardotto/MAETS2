@@ -1,5 +1,6 @@
 ﻿using DAO.Interfaces;
 using DTO;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,19 +17,32 @@ namespace DAO
             this._context = context;
         }
 
-        public Task Create(DesenvolvedorDTO desenvolvedor)
+        public async Task Create(DesenvolvedorDTO desenvolvedor)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _context.Desenvolvedoras.Add(desenvolvedor);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro no banco de dados");
+            }
         }
 
-        public Task Delete(DesenvolvedorDTO desenvolvedor)
+        public async Task Delete(DesenvolvedorDTO desenvolvedor)
         {
-            throw new NotImplementedException();
+            DesenvolvedorDTO DbD = await _context.Desenvolvedoras.FirstOrDefaultAsync(u => u.ID == desenvolvedor.ID);
+            if (DbD != null)
+            {
+                _context.Desenvolvedoras.Remove(desenvolvedor);
+                await _context.SaveChangesAsync();
+            }
         }
 
-        public Task<List<DesenvolvedorDTO>> GetDesenvolvedores()
+        public async Task<List<DesenvolvedorDTO>> GetDesenvolvedores()
         {
-            throw new NotImplementedException();
+            return await _context.Desenvolvedoras.ToListAsync();
         }
 
         public Task Update(DesenvolvedorDTO desenvolvedor)

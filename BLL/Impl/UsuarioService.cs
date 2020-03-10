@@ -1,6 +1,10 @@
 ﻿using BLL.Interfaces;
+using BLL.Validators;
+using Common;
+using Common.Extensions;
 using DAO.Interfaces;
 using DTO;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,19 +20,22 @@ namespace BLL.Impl
             this._usuariorepository = usuariorepository;
         }
 
-        public Task<UsuarioDTO> Authenticate(string email, string password)
+        public async Task<UsuarioDTO> Authenticate(string email, string password)
         {
-            throw new NotImplementedException();
+            return await _usuariorepository.Authenticate(email, password);
         }
 
-        public Task Create(UsuarioDTO usuario)
+        public async Task Create(UsuarioDTO usuario)
         {
-            throw new NotImplementedException();
+            ValidationResult result = new UsuarioValidator().Validate(usuario);
+            result.ThrowExceptionIfFail();
+
+            await _usuariorepository.Create(usuario);
         }
 
-        public Task Delete(UsuarioDTO usuario)
+        public async Task Delete(UsuarioDTO usuario)
         {
-            throw new NotImplementedException();
+            await _usuariorepository.Delete(usuario);
         }
 
         public Task Update(UsuarioDTO usuario)

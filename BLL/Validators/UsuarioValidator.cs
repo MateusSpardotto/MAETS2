@@ -3,6 +3,7 @@ using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Common.Extensions;
 
 namespace BLL.Validators
 {
@@ -21,6 +22,7 @@ namespace BLL.Validators
             RuleFor(u => u.DataNascimento).LessThan(DateTime.Now).WithMessage("Valor inválido!");
             RuleFor(u => u.CPF).MaximumLength(14).WithMessage("Valor inválido!");
             RuleFor(u => u.CPF).NotEmpty().WithMessage("Campo obrigatório!");
+            RuleFor(u => u.CPF).Must(u => u.IsValidCpf()).WithMessage("CPF inválido.");
         }
     }
 }

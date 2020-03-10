@@ -14,13 +14,15 @@ namespace DAO.Mappings
 
             this.Property(j => j.Nome)
                 .HasMaxLength(150)
+                .IsRequired();
+
+            this.Property(j => j.DataLancamento)
                 .IsRequired()
-                .IsUnicode();
+                .HasColumnType("date");
 
             this.Property(j => j.Especificacoes)
                 .HasMaxLength(450)
-                .IsRequired()
-                .IsUnicode();
+                .IsRequired();
         }
     }
 }
