@@ -48,12 +48,9 @@ namespace MAETS
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(options =>
             {
-                options.LoginPath = "/Account/LogIn";
+                options.LoginPath = "/Usuario/Login";
                 options.LogoutPath = "/Account/LogOff";
             });
-
-
-
         }
 
 

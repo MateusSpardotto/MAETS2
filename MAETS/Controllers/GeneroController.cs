@@ -6,11 +6,13 @@ using AutoMapper;
 using Common;
 using DAO.Interfaces;
 using DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MVCWebPresentationLayer.Models;
 
 namespace MVCWebPresentationLayer.Controllers.Genero
 {
+    [Authorize]
     public class GeneroController : Controller
     {
         private IGeneroService _generoService; 

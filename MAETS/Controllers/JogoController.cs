@@ -6,11 +6,13 @@ using AutoMapper;
 using Common;
 using DAO.Interfaces;
 using DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MVCWebPresentationLayer.Models.Insert;
 
 namespace MVCWebPresentationLayer.Controllers
 {
+    [Authorize]
     public class JogoController : Controller
     {
         private IJogoService _jogoService;
@@ -51,6 +53,7 @@ namespace MVCWebPresentationLayer.Controllers
 
             return View();
         }
+
 
         public IActionResult Create()
         {
