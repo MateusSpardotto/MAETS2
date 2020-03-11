@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DAO.Migrations
 {
-    public partial class initialDatabase : Migration
+    public partial class initialdatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,8 +13,8 @@ namespace DAO.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(nullable: true),
-                    PaisOrigem = table.Column<string>(nullable: true)
+                    Nome = table.Column<string>(unicode: false, nullable: true),
+                    PaisOrigem = table.Column<string>(unicode: false, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -27,7 +27,7 @@ namespace DAO.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(nullable: true)
+                    Nome = table.Column<string>(unicode: false, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -40,13 +40,13 @@ namespace DAO.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    Senha = table.Column<string>(nullable: true),
-                    CPF = table.Column<string>(nullable: true),
+                    Nome = table.Column<string>(unicode: false, nullable: true),
+                    Email = table.Column<string>(unicode: false, nullable: true),
+                    Senha = table.Column<string>(unicode: false, nullable: true),
+                    CPF = table.Column<string>(unicode: false, nullable: true),
+                    Pais = table.Column<string>(unicode: false, nullable: true),
                     DataNascimento = table.Column<DateTime>(nullable: false),
-                    TipoUsuario = table.Column<int>(nullable: false),
-                    Pais = table.Column<string>(nullable: true)
+                    TipoUsuario = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -59,13 +59,13 @@ namespace DAO.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(nullable: true),
+                    Nome = table.Column<string>(unicode: false, nullable: true),
                     Preco = table.Column<double>(nullable: false),
                     Calssificacao = table.Column<int>(nullable: false),
                     DesenvolvedoraDTOID = table.Column<int>(nullable: false),
                     GeneroDTOID = table.Column<int>(nullable: false),
                     DataLancamento = table.Column<DateTime>(nullable: false),
-                    Especificacoes = table.Column<string>(nullable: true)
+                    Especificacoes = table.Column<string>(unicode: false, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -75,13 +75,37 @@ namespace DAO.Migrations
                         column: x => x.DesenvolvedoraDTOID,
                         principalTable: "Desenvolvedoras",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Jogos_Generos_GeneroDTOID",
                         column: x => x.GeneroDTOID,
                         principalTable: "Generos",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UsuarioDTO_JogoDTO",
+                columns: table => new
+                {
+                    UsuarioDTOID = table.Column<int>(nullable: false),
+                    JogoDTOID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UsuarioDTO_JogoDTO", x => new { x.UsuarioDTOID, x.JogoDTOID });
+                    table.ForeignKey(
+                        name: "FK_UsuarioDTO_JogoDTO_Jogos_JogoDTOID",
+                        column: x => x.JogoDTOID,
+                        principalTable: "Jogos",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UsuarioDTO_JogoDTO_Usuarios_UsuarioDTOID",
+                        column: x => x.UsuarioDTOID,
+                        principalTable: "Usuarios",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -93,10 +117,18 @@ namespace DAO.Migrations
                 name: "IX_Jogos_GeneroDTOID",
                 table: "Jogos",
                 column: "GeneroDTOID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UsuarioDTO_JogoDTO_JogoDTOID",
+                table: "UsuarioDTO_JogoDTO",
+                column: "JogoDTOID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "UsuarioDTO_JogoDTO");
+
             migrationBuilder.DropTable(
                 name: "Jogos");
 

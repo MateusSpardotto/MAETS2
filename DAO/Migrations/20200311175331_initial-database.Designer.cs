@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAO.Migrations
 {
     [DbContext(typeof(MContext))]
-    [Migration("20200309183500_initialDatabase")]
-    partial class initialDatabase
+    [Migration("20200311175331_initial-database")]
+    partial class initialdatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,10 +29,12 @@ namespace DAO.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Nome")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(max)")
+                        .IsUnicode(false);
 
                     b.Property<string>("PaisOrigem")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(max)")
+                        .IsUnicode(false);
 
                     b.HasKey("ID");
 
@@ -47,7 +49,8 @@ namespace DAO.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Nome")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(max)")
+                        .IsUnicode(false);
 
                     b.HasKey("ID");
 
@@ -71,13 +74,15 @@ namespace DAO.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Especificacoes")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(max)")
+                        .IsUnicode(false);
 
                     b.Property<int>("GeneroDTOID")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(max)")
+                        .IsUnicode(false);
 
                     b.Property<double>("Preco")
                         .HasColumnType("float");
@@ -99,22 +104,27 @@ namespace DAO.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CPF")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(max)")
+                        .IsUnicode(false);
 
                     b.Property<DateTime>("DataNascimento")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(max)")
+                        .IsUnicode(false);
 
                     b.Property<string>("Nome")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(max)")
+                        .IsUnicode(false);
 
                     b.Property<string>("Pais")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(max)")
+                        .IsUnicode(false);
 
                     b.Property<string>("Senha")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(max)")
+                        .IsUnicode(false);
 
                     b.Property<int>("TipoUsuario")
                         .HasColumnType("int");
@@ -124,18 +134,48 @@ namespace DAO.Migrations
                     b.ToTable("Usuarios");
                 });
 
+            modelBuilder.Entity("DTO.UsuarioDTO_JogoDTO", b =>
+                {
+                    b.Property<int>("UsuarioDTOID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("JogoDTOID")
+                        .HasColumnType("int");
+
+                    b.HasKey("UsuarioDTOID", "JogoDTOID");
+
+                    b.HasIndex("JogoDTOID");
+
+                    b.ToTable("UsuarioDTO_JogoDTO");
+                });
+
             modelBuilder.Entity("DTO.JogoDTO", b =>
                 {
                     b.HasOne("DTO.DesenvolvedorDTO", "DesenvolvedoraDTO")
-                        .WithMany()
+                        .WithMany("Jogos")
                         .HasForeignKey("DesenvolvedoraDTOID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("DTO.GeneroDTO", "GeneroDTO")
-                        .WithMany()
+                        .WithMany("Jogos")
                         .HasForeignKey("GeneroDTOID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DTO.UsuarioDTO_JogoDTO", b =>
+                {
+                    b.HasOne("DTO.JogoDTO", "JogoDTO")
+                        .WithMany("Usuarios")
+                        .HasForeignKey("JogoDTOID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("DTO.UsuarioDTO", "UsuarioDTO")
+                        .WithMany("Jogos")
+                        .HasForeignKey("UsuarioDTOID")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618
