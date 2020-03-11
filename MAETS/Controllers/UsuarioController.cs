@@ -79,8 +79,7 @@ namespace MVCWebPresentationLayer.Controllers
         [HttpPost]
         public async Task<ActionResult> Login(string email, string senha)
         {
-            UsuarioDTO user = await _usuarioService.Authenticate(email, senha);
-            if (user == null)
+            if (await _usuarioService.Authenticate(email, senha) == null)
             {
                 return View();
             }
@@ -90,7 +89,7 @@ namespace MVCWebPresentationLayer.Controllers
                 Response.Cookies.Append("Key", "1");
                 var Teste = Request.Cookies["Key"].ToString();
 
-                return RedirectToAction("Index", "Cliente");
+                return RedirectToAction("Index", "Usuario");
             }
             catch (Exception ex)
             {
