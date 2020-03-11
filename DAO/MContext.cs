@@ -28,6 +28,17 @@ namespace DAO
                 entityType.GetProperties().Where(c => c.ClrType == typeof(string)).ToList()
                     .ForEach(p => p.SetIsUnicode(false));
             }
+
+            modelBuilder.Entity<UsuarioDTO_JogoDTO>()
+               .HasKey(si => new { si.UsuarioDTOID, si.JogoDTOID });
+            modelBuilder.Entity<UsuarioDTO_JogoDTO>()
+                .HasOne(si => si.UsuarioDTO)
+                .WithMany(i => i.Jogos)
+                .HasForeignKey(si => si.UsuarioDTOID);
+            modelBuilder.Entity<UsuarioDTO_JogoDTO>()
+                .HasOne(si => si.JogoDTO)
+                .WithMany(s => s.Usuarios)
+                .HasForeignKey(si => si.JogoDTOID);
         } 
     }
 }

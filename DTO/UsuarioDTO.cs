@@ -15,7 +15,6 @@ namespace DTO
         public Paises Pais { get; set; }
         public DateTime DataNascimento { get; set; }
         public TipoUsuario TipoUsuario { get; set; }
-        public virtual JogoDTO JogoDTO { get; set; }
-        public virtual ICollection<JogoDTO> Jogos { get; set; }
+        public virtual ICollection<UsuarioDTO_JogoDTO> Jogos { get; set; }
     }
 }
