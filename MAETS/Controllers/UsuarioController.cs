@@ -27,7 +27,16 @@ namespace MVCWebPresentationLayer.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            if (!HttpContext.Request.Cookies.ContainsKey("first_request"))
+            {
+                HttpContext.Response.Cookies.Append("first_request", DateTime.Now.ToString());
+                return Content("Welcome, new visitor!");
+            }
+            else
+            {
+                DateTime firstRequest = DateTime.Parse(HttpContext.Request.Cookies["first_request"]);
+                return Content("Welcome back, user! You first visited us on: " + firstRequest.ToString());
+            }
         }
 
         [HttpPost]
@@ -62,24 +71,24 @@ namespace MVCWebPresentationLayer.Controllers
             return View();
         }
 
+        public IActionResult Login()
+        {
+            return View();
+        }
+
         [HttpPost]
         public async Task<ActionResult> Login(string email, string senha)
         {
-            if (_usuarioService.Authenticate(email, senha) == null)
+            UsuarioDTO user = await _usuarioService.Authenticate(email, senha);
+            if (user == null)
             {
                 return View();
             }
 
             try
             {
-                var claims = new[] { new Claim(ClaimTypes.Name, email), new Claim(ClaimTypes.Role, "Authenticate") };
-                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-                //Response.Cookies.Append("NomeDoCookie", ID.ToString()); 
-                //Request.Cookies["NomeDoCookie"]
-
-                //await MContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
-                //HttpContext.Authentication.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
+                Response.Cookies.Append("Key", "1");
+                var Teste = Request.Cookies["Key"].ToString();
 
                 return RedirectToAction("Index", "Cliente");
             }

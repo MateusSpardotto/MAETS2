@@ -7,7 +7,7 @@ namespace MVCWebPresentationLayer.Models.Insert
 {
     public class LoginViewModel
     {
-        public int Email { get; set; }
-        public int Senha { get; set; }
+        public string Email { get; set; }
+        public string Senha { get; set; }
     }
 }
