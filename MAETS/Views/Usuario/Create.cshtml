@@ -44,11 +44,22 @@
                 </div>
             </div>
 
+            @{
+                string[] paises = Enum.GetNames(typeof(DTO.Enums.Paises));
+            }
+
             <div class="form-group">
-                <label asp-for="Pais" class="control-label"></label>
-                <input asp-for="Pais" class="form-control" />
-                <span asp-validation-for="Pais" class="text-danger"></span>
+                <label class="control-label col-md-2">Pais</label>
+                <div class="col-md-10">
+                    <select class="form-control" name="Pais" id="Pais">
+                        @for (int i = 0; i < paises.Length; i++)
+                        {
+                            <option value="@i">@paises[i]</option>
+                        }
+                    </select>
+                </div>
             </div>
+
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control" />

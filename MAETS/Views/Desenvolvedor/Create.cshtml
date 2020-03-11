@@ -17,11 +17,23 @@
                 <input asp-for="Nome" class="form-control" />
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
+
+            @{
+                string[] paises = Enum.GetNames(typeof(DTO.Enums.Paises));
+            }
+
             <div class="form-group">
-                <label asp-for="PaisOrigem" class="control-label"></label>
-                <input asp-for="PaisOrigem" class="form-control" />
-                <span asp-validation-for="PaisOrigem" class="text-danger"></span>
+                <label class="control-label col-md-2">PaisOrigem</label>
+                <div class="col-md-10">
+                    <select class="form-control" name="PaisOrigem" id="PaisOrigem">
+                        @for (int i = 0; i < paises.Length; i++)
+                        {
+                            <option value="@i">@paises[i]</option>
+                        }
+                    </select>
+                </div>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

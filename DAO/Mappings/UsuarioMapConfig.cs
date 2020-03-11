@@ -40,10 +40,6 @@ namespace DAO.Mappings
             this.Property(u => u.DataNascimento)
                 .IsRequired()
                 .HasColumnType("date");
-
-            this.Property(u => u.Pais)
-                .HasMaxLength(80)
-                .IsRequired();
         }
     }
 }
