@@ -27,13 +27,13 @@ namespace MVCWebPresentationLayer.Models.Insert
         [Required(ErrorMessage = "O Email deve ser informado.")]
         [EmailAddress]
         public string Email { get; set; }
-        
+
         [Required(ErrorMessage = "A senha deve ser informada.")]
-        [StringLength(maximumLength: 16, MinimumLength = 8, ErrorMessage ="A senha deve conter de 8 a 16 caracteres.")]
-        public string Senha { get; private set; }
-        
+        [StringLength(maximumLength: 16, MinimumLength = 8, ErrorMessage = "A senha deve conter de 8 a 16 caracteres.")]
+        public string Senha { get; set; }
+
         [Required(ErrorMessage = "Por favor, confirme sua senha.")]
         [Compare("Senha", ErrorMessage = "As senhas devem ser iguais.")]
-        public string Confirmar_Senha { get; private set; }
+        public string Confirmar_Senha { get; set; }
     }
 }

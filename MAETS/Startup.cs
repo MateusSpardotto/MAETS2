@@ -45,6 +45,8 @@ namespace MAETS
             services.AddTransient<IJogoService, JogoService>();
             services.AddTransient<IJogoRepository, JogoRepository>();
 
+            //jwt
+
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(options =>
             {

@@ -13,6 +13,7 @@ using DAO.Interfaces;
 using DTO;
 using Microsoft.AspNetCore.Mvc;
 using MVCWebPresentationLayer.Models.Insert;
+using Microsoft.AspNetCore.Authentication;
 
 namespace MVCWebPresentationLayer.Controllers
 {
@@ -79,33 +80,18 @@ namespace MVCWebPresentationLayer.Controllers
         [HttpPost]
         public async Task<ActionResult> Login(string email, string senha)
         {
-            //if (await _usuarioService.Authenticate(email, senha) == null)
-            //{
-            //    return View();
-            //}
 
-            //try
-            //{
-            //    Response.Cookies.Append("Key", "1");
-            //    var Teste = Request.Cookies["Key"].ToString();
-
-            //    return RedirectToAction("Index", "Usuario");
-            //}
-            //catch (Exception ex)
-            //{
-            //    ViewBag.Erros = ex.Message;
-            //}
-
-            if(email.ToLower()== "admin" && senha == "123")
+            if(await _usuarioService.Authenticate(email, senha) != null)
             {
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimType.Name, email)
+                    new Claim(ClaimTypes.Name, email)
                 };
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var principal = new ClaimsPrincipal(identity);
                 var props = new AuthenticationProperties();
-                HttpContext.SingInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, props).Wait();
+                props.IsPersistent = false;
+                HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, props).Wait();
                 return RedirectToAction("Index", "Home");
             }
 
