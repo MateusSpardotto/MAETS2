@@ -1,10 +1,33 @@
-﻿@{
+﻿@model IEnumerable<MVCWebPresentationLayer.Models.Query.GeneroQueryViewModel>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
     <div class="text-center">
         <h1 class="display-4">MAETS</h1><br />
         <h6 class="display-12">Um serviço de jogos que NÃO foi inspirado na STEAM.(Qualquer semelhança é mera conhecidencia)</h6><br />
-        <hr />
-        <p>Createt by: Developers HBSIS</p>
+
+        <hr/>
+
+        <table align="left" width="10%" border="1">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayName("Gênero")
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(item.Nome, "Genero", new { /* id=item.PrimaryKey */ })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <br/>
     </div>
