@@ -6,6 +6,7 @@ namespace DTO.Enums
 {
     public enum Paises
     {
+        Selecionar = 0,
         Afeganistão,
         África_do_Sul,
         Akrotiri,

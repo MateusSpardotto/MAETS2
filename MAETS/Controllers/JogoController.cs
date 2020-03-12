@@ -12,7 +12,7 @@ using MVCWebPresentationLayer.Models.Insert;
 
 namespace MVCWebPresentationLayer.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class JogoController : Controller
     {
         private IJogoService _jogoService;

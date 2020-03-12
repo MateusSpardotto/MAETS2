@@ -6,7 +6,8 @@ namespace DTO.Enums
 {
     public enum ClassificacaoIndicativa
     {
-        Livre = 0,
+        Selecionar = 0,
+        Livre = 1,
         Dez = 10,
         Doze = 12,
         Quatorze = 14,

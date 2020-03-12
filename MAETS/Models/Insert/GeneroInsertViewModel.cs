@@ -9,7 +9,7 @@ namespace MVCWebPresentationLayer.Models
     public class GeneroInsertViewModel
     {
         [Required(ErrorMessage = "Nome do Gênero deve ser informado.")]
-        [StringLength(maximumLength: 30, MinimumLength = 5, ErrorMessage = "O nome do gênero deve conter de 5 a 30 caracteres.")]
+        [StringLength(maximumLength: 30, MinimumLength = 3, ErrorMessage = "O nome do gênero deve conter de 5 a 30 caracteres.")]
         public string Nome { get; set; }
     }
 }

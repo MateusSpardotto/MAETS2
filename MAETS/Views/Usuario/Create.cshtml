@@ -15,17 +15,17 @@
             <div class="form-group">
                 <label asp-for="Nome" class="control-label"></label>
                 <input asp-for="Nome" class="form-control" />
-                <span asp-validation-for="Nome" class="text-danger"></span>
+                <span class="text-danger" name="erroNome" id="erroNome"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CPF" class="control-label"></label>
                 <input asp-for="CPF" class="form-control" />
-                <span asp-validation-for="CPF" class="text-danger"></span>
+                <span asp-validation-for="CPF" name="erroCPF" id="erroCPF" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DataNascimento" class="control-label"></label>
                 <input asp-for="DataNascimento" type="date" class="form-control"  />
-                <span asp-validation-for="DataNascimento" class="text-danger"></span>
+                <span asp-validation-for="DataNascimento" name="erroDataNascimento" id="erroDataNascimento" class="text-danger"></span>
             </div>
 
             @{
@@ -33,14 +33,15 @@
             }
 
             <div class="form-group">
-                <label class="control-label col-md-2">Tipo_Usuario</label>
+                <label asp-for="TipoUsuario" class="control-label"></label>
                 <div class="col-md-10">
                     <select class="form-control" name="TipoUsuario" id="TipoUsuario">
                         @for (int i = 0; i < tipoUsuario.Length; i++)
-                        {
+                         {
                             <option value="@i">@tipoUsuario[i]</option>
-                        }
+                         }
                     </select>
+                    <span class="text-danger" name="erroTipoUsuario" id="erroTipoUsuario"></span>
                 </div>
             </div>
 
@@ -49,7 +50,7 @@
             }
 
             <div class="form-group">
-                <label class="control-label col-md-2">Pais</label>
+                <label class="control-label col-md-2">País</label>
                 <div class="col-md-10">
                     <select class="form-control" name="Pais" id="Pais">
                         @for (int i = 0; i < paises.Length; i++)
@@ -57,26 +58,29 @@
                             <option value="@i">@paises[i]</option>
                         }
                     </select>
+                    <span class="text-danger" name="erroPais" id="erroPais"></span>
                 </div>
             </div>
 
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" type="email" placeholder="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <input asp-for="Email" type="email" name="Email" id="Email" placeholder="Email" class="form-control" />
+                <span asp-validation-for="Email" name="erroEmail" id="erroEmail" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Senha" class="control-label"></label>
-                <input asp-for="Senha" type="password" placeholder="Senha" class="form-control" />
-                <span asp-validation-for="Senha" class="text-danger"></span>
+                <input asp-for="Senha" type="password" name="Senha" id="Senha" placeholder="Senha" class="form-control" />
+                <span asp-validation-for="Senha" name="erroSenha" id="erroSenha" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Confirmar_Senha" class="control-label"></label>
-                <input asp-for="Confirmar_Senha" type="password" placeholder="Confirmar Senha" class="form-control" />
-                <span asp-validation-for="Confirmar_Senha" class="text-danger"></span>
+                <input asp-for="Confirmar_Senha" type="password" name="Confirmar_Senha" id="Confirmar_Senha" placeholder="Confirmar Senha" class="form-control" />
+                <span class="text-danger" name="erroConfirmar_Senha" id="erroConfirmar_Senha"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <div class="col-md-10">
+                    <input name="Create" id="ButtonCreate" type="submit" value="Create" class="btn btn-primary" />
+                </div>
             </div>
         </form>
     </div>
@@ -86,3 +90,92 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+
+@section scripts 
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var cpfMask = $("#CPF");
+            cpfMask.mask('000.000.000-00', { reverse: false });
+            $("#ButtonCreate").click(function (e) {
+                
+                var nome = $("#Nome").val();
+                var cpf = $("#CPF").val();
+                var dataNascimento = $("#DataNascimento").val();
+                var email = $("#Email").val();
+                var tipoUsuario = $("#TipoUsuario").val();
+                var paises = $("#Pais").val();
+                var senha = $("#Senha").val();
+                var confirmaSenha = $("#Confirmar_Senha").val();
+
+                var sucesso = true;
+
+                if (nome == "") {
+                    $("#erroNome").html("Nome deve ser informado.");
+                    sucesso = false;
+                }
+                else if (nome.length < 5 || nome.length > 60) {
+                    $("#erroNome").html("Nome deve conter entre 5 e 60 caracteres.");
+                    sucesso = false;
+                }
+                else {
+                    $("#erroNome").html("");
+                }
+
+                if (cpf == "") {
+                    $("#erroCPF").html("CPF deve ser informado.");
+                    sucesso = false;
+                }
+                else if (cpf.length != 14) {
+                    $("#erroCPF").html("CPF deve conter 14 caracteres.");
+                    sucesso = false;
+                }
+                else {
+                    $("#erroCPF").html("");
+                }
+
+                if (email == "") {
+                    $("#erroEmail").html("O email deve ser informado.");
+                    sucesso = false;
+                }
+                else if (!validateEmail(email)) {
+                    $("#erroEmail").html("Email inválido.");
+                    sucesso = false;
+                }
+                else {
+                    $("#erroEmail").html("");
+                }
+
+                if (dataNascimento == "") {
+                    $("#erroDataNascimento").html("A data de nascimento deve ser informada");
+                    sucesso = false;
+                } else {
+                    $("#erroDataNascimento").html("");
+                }
+
+                if (senha.length < 8 || senha.length > 16) {
+                    $("#erroSenha").html("Senha deve conter entre 8 e 16 caracteres");
+                    sucesso = false;
+                }
+
+                if (senha != confirmaSenha) {
+                    $("#erroConfirmar_Senha").html("Senhas não conferem.");
+                    sucesso = false;
+                }
+
+                if (paises == 0) {
+                    $("#erroPais").html("O País deve ser selecionado.")
+                    sucesso = false;
+                }
+                if (tipoUsuario == 0) {
+                    $("#erroTipoUsuario").html("O Tipo de Usuário deve ser selecionado.")
+                }
+
+                if (!sucesso) {
+                    e.preventDefault();
+                }
+
+            });
+        });
+    </script>
+}

@@ -15,7 +15,7 @@
             <div class="form-group">
                 <label asp-for="Nome" class="control-label"></label>
                 <input asp-for="Nome" class="form-control" />
-                <span asp-validation-for="Nome" class="text-danger"></span>
+                <span name="erroNome" class="text-danger"></span>
             </div>
 
             @{
@@ -33,9 +33,9 @@
                     </select>
                 </div>
             </div>
-
+            <span class="text-danger" name="erroPais" id="erroPais"></span>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" id="btnCreate" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -45,3 +45,40 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnCreate").click(function (e) {
+
+                var nome = $("#Nome").val();
+                var paisOrigem = $("#PaisOrigem").val();
+
+                var sucesso = true;
+
+                if (nome == "") {
+                    $("#erroNome").html("Nome deve ser informado.");
+                    sucesso = false;
+                }
+                else if (nome.length < 5 || nome.length > 60) {
+                    $("#erroNome").html("Nome deve conter entre 5 e 60 caracteres.");
+                    sucesso = false;
+                }
+                else {
+                    $("#erroNome").html("");
+                }
+
+                if (paisOrigem == 0) {
+                    $("#erroPais").html("País deve ser informado.");
+                    sucesso = false;
+                }
+
+                 if (!sucesso) {
+                    e.preventDefault();
+                 }
+
+            });
+        });
+    </script>
+
+ }

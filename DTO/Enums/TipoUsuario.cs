@@ -6,6 +6,7 @@ namespace DTO.Enums
 {
     public enum TipoUsuario
     {
+        Selecionar = 0,
         Comum,
         Adm
     }

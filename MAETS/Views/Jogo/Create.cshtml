@@ -28,7 +28,7 @@
             }
 
             <div class="form-group">
-                <label class="control-label col-md-2">Calssificacao</label>
+                <label class="control-label col-md-2">Calssificação</label>
                 <div class="col-md-10">
                     <select class="form-control" name="Calssificacao" id="Calssificacao">
                         @for (int i = 0; i < classificacao.Length; i++)
@@ -51,7 +51,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="DataLancamento" class="control-label"></label>
-                <input asp-for="DataLancamento" class="form-control" />
+                <input asp-for="DataLancamento" type="date" class="form-control" />
                 <span asp-validation-for="DataLancamento" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -70,3 +70,78 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#Create").click(function (e) {
+
+                var nome = $("#Nome").val();
+                var preco = $("#Preco").val();
+                var classificacao = $("#Classificacao").val();
+                var especificacoes = $("#Especificacoes").val();
+                var dataLancamento = $("#DataLancamento").val();
+
+                var sucesso = true;
+
+                if (nome == "") {
+                    $("#erroNome").html("Nome deve ser informado.");
+                    sucesso = false;
+                }
+                else if (nome.length < 5 || nome.length > 50) {
+                    $("#erroNome").html("Nome deve conter entre 5 e 50 caracteres.");
+                    sucesso = false;
+                }
+                else {
+                    $("#erroNome").html("");
+                }
+
+                if (preco == null) {
+                    $("#erroPreco").html("Preço deve ser informado.");
+                    sucesso = false;
+                } else if (preco < 1) {
+                    $("#erroPreco").html("Preço não pode ser menor ou igual a zero.");
+                    sucesso = false;
+                }
+                else {
+                    $("#erroPreco").html("");
+                }
+
+                if (especificacoes == "") {
+                    $("#erroEspecificacoes").html("As especificações devem ser informadas.");
+                    sucesso = false;
+                }
+                else if (especificacoes.length < 50 || nome.length > 450) {
+                    $("#erroEspecificacoes").html("As especificações devem conter de 50 a 450 caracteres.");
+                    sucesso = false;
+                }
+                else {
+                    $("#erroEspecificacoes").html("");
+                }
+
+                if (dataLancamento == "") {
+                    $("#erroDataLancamento").html("A data de lançamento deve ser informada.");
+                    sucesso = false;
+                } else if (dataLancamento < Date.now) {
+                    $("#erroDataLancamento").html("Data de Lançamento inválida.");
+                    sucesso = false;
+                }
+                else {
+                    $("#erroDataLancamento").html("");
+                }
+
+                if (classificacao == "") {
+                    $("#erroClassificacao").html("A classificação deve ser informada.");
+                    sucesso = false;
+                }
+                else {
+                    $("#erroClassificacao").html("");
+                }
+
+                 if (!sucesso) {
+                    e.preventDefault();
+                 }
+
+            });
+        });
+    </script>
+ }
