@@ -45,12 +45,16 @@ namespace MAETS
             services.AddTransient<IJogoService, JogoService>();
             services.AddTransient<IJogoRepository, JogoRepository>();
 
+            //jwt
+
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(options =>
             {
                 options.LoginPath = "/Usuario/Login";
-                options.LogoutPath = "/Account/LogOff";
+                options.LogoutPath = "/Usuario/LogOff";
+                options.Cookie.Name = "AshProgHelpCookie";
             });
+            services.AddMvc();
         }
 
 
@@ -73,7 +77,10 @@ namespace MAETS
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseCookiePolicy();
 
             app.UseEndpoints(endpoints =>
             {

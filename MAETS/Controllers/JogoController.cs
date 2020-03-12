@@ -9,6 +9,7 @@ using DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MVCWebPresentationLayer.Models.Insert;
+using MVCWebPresentationLayer.Models.Query;
 
 namespace MVCWebPresentationLayer.Controllers
 {
@@ -16,10 +17,12 @@ namespace MVCWebPresentationLayer.Controllers
     public class JogoController : Controller
     {
         private IJogoService _jogoService;
+        private IDesenvolvedorService _desenvolvedorService;
 
-        public JogoController(IJogoService jogoService)
+        public JogoController(IJogoService jogoService, IDesenvolvedorService desenvolvedorService)
         {
             this._jogoService = jogoService;
+            this._desenvolvedorService = desenvolvedorService;
         }
 
         public IActionResult Index()
@@ -32,15 +35,25 @@ namespace MVCWebPresentationLayer.Controllers
         {
             try
             {
-                var configuration = new MapperConfiguration(cfg =>
+                var configurationJogo = new MapperConfiguration(cfg =>
                 {
                     cfg.CreateMap<JogoInsertViewModel, JogoDTO>();
                 });
-                IMapper mapper = configuration.CreateMapper();
-                JogoDTO jogo = mapper.Map<JogoDTO>(viewModel);
+                IMapper mapperJogo = configurationJogo.CreateMapper();
+                JogoDTO jogo = mapperJogo.Map<JogoDTO>(viewModel);
                 await _jogoService.Create(jogo);
 
-                return View();
+                List<DesenvolvedorDTO> desenvolvedores = await _desenvolvedorService.GetDesenvolvedores();
+
+                var configurationDesenvolvedor = new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<DesenvolvedorDTO, DesenvolvedorQueryViewModel>();
+                });
+                IMapper mapperDesenvolvedor = configurationDesenvolvedor.CreateMapper();
+
+                List<DesenvolvedorQueryViewModel> dadosDesenvolvedor = mapperDesenvolvedor.Map<List<DesenvolvedorQueryViewModel>>(desenvolvedores);
+
+                return View(dadosDesenvolvedor);
             }
             catch (MSException ex)
             {

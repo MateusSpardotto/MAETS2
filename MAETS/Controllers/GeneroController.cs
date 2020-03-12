@@ -9,6 +9,7 @@ using DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MVCWebPresentationLayer.Models;
+using MVCWebPresentationLayer.Models.Query;
 
 namespace MVCWebPresentationLayer.Controllers.Genero
 {
