@@ -81,6 +81,8 @@ namespace MVCWebPresentationLayer.Controllers
         public async Task<ActionResult> Login(string email, string senha)
         {
 
+           //this.User.Identity.
+
             if(await _usuarioService.Authenticate(email, senha) != null)
             {
                 var claims = new List<Claim>
@@ -90,12 +92,22 @@ namespace MVCWebPresentationLayer.Controllers
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var principal = new ClaimsPrincipal(identity);
                 var props = new AuthenticationProperties();
-                props.IsPersistent = false;
                 HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, props).Wait();
+                ViewBag.UsuarioLogado = true;
                 return RedirectToAction("Index", "Home");
             }
+            else
+            {
+                return View();
+            }
 
-            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
