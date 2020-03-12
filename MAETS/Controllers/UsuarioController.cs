@@ -79,21 +79,34 @@ namespace MVCWebPresentationLayer.Controllers
         [HttpPost]
         public async Task<ActionResult> Login(string email, string senha)
         {
-            if (await _usuarioService.Authenticate(email, senha) == null)
-            {
-                return View();
-            }
+            //if (await _usuarioService.Authenticate(email, senha) == null)
+            //{
+            //    return View();
+            //}
 
-            try
-            {
-                Response.Cookies.Append("Key", "1");
-                var Teste = Request.Cookies["Key"].ToString();
+            //try
+            //{
+            //    Response.Cookies.Append("Key", "1");
+            //    var Teste = Request.Cookies["Key"].ToString();
 
-                return RedirectToAction("Index", "Usuario");
-            }
-            catch (Exception ex)
+            //    return RedirectToAction("Index", "Usuario");
+            //}
+            //catch (Exception ex)
+            //{
+            //    ViewBag.Erros = ex.Message;
+            //}
+
+            if(email.ToLower()== "admin" && senha == "123")
             {
-                ViewBag.Erros = ex.Message;
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimType.Name, email)
+                };
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var principal = new ClaimsPrincipal(identity);
+                var props = new AuthenticationProperties();
+                HttpContext.SingInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, props).Wait();
+                return RedirectToAction("Index", "Home");
             }
 
             return View();
