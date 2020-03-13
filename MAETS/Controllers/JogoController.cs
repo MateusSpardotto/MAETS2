@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MVCWebPresentationLayer.Models.Insert;
 using MVCWebPresentationLayer.Models.Query;
+using Common.Extensions;
 
 namespace MVCWebPresentationLayer.Controllers
 {
@@ -18,11 +19,13 @@ namespace MVCWebPresentationLayer.Controllers
     {
         private IJogoService _jogoService;
         private IDesenvolvedorService _desenvolvedorService;
+        private IGeneroService _generosService;
 
-        public JogoController(IJogoService jogoService, IDesenvolvedorService desenvolvedorService)
+        public JogoController(IJogoService jogoService, IDesenvolvedorService desenvolvedorService, IGeneroService generoService)
         {
             this._jogoService = jogoService;
             this._desenvolvedorService = desenvolvedorService;
+            this._generosService = generoService;
         }
 
         public IActionResult Index()
@@ -43,17 +46,6 @@ namespace MVCWebPresentationLayer.Controllers
                 JogoDTO jogo = mapperJogo.Map<JogoDTO>(viewModel);
                 await _jogoService.Create(jogo);
 
-                List<DesenvolvedorDTO> desenvolvedores = await _desenvolvedorService.GetDesenvolvedores();
-
-                var configurationDesenvolvedor = new MapperConfiguration(cfg =>
-                {
-                    cfg.CreateMap<DesenvolvedorDTO, DesenvolvedorQueryViewModel>();
-                });
-                IMapper mapperDesenvolvedor = configurationDesenvolvedor.CreateMapper();
-
-                List<DesenvolvedorQueryViewModel> dadosDesenvolvedor = mapperDesenvolvedor.Map<List<DesenvolvedorQueryViewModel>>(desenvolvedores);
-
-                return View(dadosDesenvolvedor);
             }
             catch (MSException ex)
             {
@@ -68,9 +60,18 @@ namespace MVCWebPresentationLayer.Controllers
         }
 
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            List<DesenvolvedorDTO> desenvolvedores = await _desenvolvedorService.GetDesenvolvedores();
+            //List<GeneroDTO> generos = await _generosService.GetGeneros();
+            List<DesenvolvedorQueryViewModel> data =
+                desenvolvedores.ToViewModel<DesenvolvedorDTO, DesenvolvedorQueryViewModel>();
+
+
             return View();
+
         }
+
+
     }
 }
