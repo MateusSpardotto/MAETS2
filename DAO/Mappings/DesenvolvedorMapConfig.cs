@@ -1,18 +1,18 @@
 ﻿using DTO;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
 using System.Text;
 
 namespace DAO.Mappings
 {
-    public class DesenvolvedorMapConfig : EntityTypeConfiguration<DesenvolvedorDTO>
+    public class DesenvolvedorMapConfig : IEntityTypeConfiguration<DesenvolvedorDTO>
     {
-        public DesenvolvedorMapConfig()
+        public void Configure(EntityTypeBuilder<DesenvolvedorDTO> builder)
         {
-            this.ToTable("DESENVOLVEDORES");
-
-            this.Property(d => d.Nome)
+            builder.ToTable("DESENVOLVEDORES");
+            builder.Property(d => d.Nome)
                 .HasMaxLength(150)
                 .IsRequired();
         }

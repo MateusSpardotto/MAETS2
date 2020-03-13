@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace DAO
 {
@@ -54,6 +55,26 @@ namespace DAO
         public Task Update(UsuarioDTO usuario)
         {
             throw new NotImplementedException();
+        }
+
+        public string VerificaEmail(string email)
+        {
+            var user = _context.Usuarios.FirstOrDefault(p => p.Email == email);
+            if (user == null)
+            {
+                return "Email inexistente e/ou incorreto na base de dados.";
+            }
+            return string.Empty;
+        }
+
+        public string VerificaSenha(string senha)
+        {
+            var user = _context.Usuarios.FirstOrDefault(p => p.Senha == senha);
+            if (user == null)
+            {
+                return "Senha inexistente e/ou inválida na base de dados.";
+            }
+            return string.Empty;
         }
     }
 }

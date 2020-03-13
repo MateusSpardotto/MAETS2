@@ -12,5 +12,8 @@ namespace BLL.Interfaces
         Task Update(UsuarioDTO usuario);
         Task Delete(UsuarioDTO usuario);
         Task<UsuarioDTO> Authenticate(string email, string password);
+
+        string VerificaEmail(string email);
+        string VerificaSenha(string senha);
     }
 }

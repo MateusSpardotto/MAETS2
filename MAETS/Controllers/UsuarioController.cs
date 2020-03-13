@@ -76,6 +76,17 @@ namespace MVCWebPresentationLayer.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public string VerificaEmail(string email)
+        {
+            return _usuarioService.VerificaEmail(email);
+        }
+
+        [HttpGet]
+        public string VerificaSenha(string senha) 
+        {
+            return _usuarioService.VerificaSenha(senha);
+        }
 
         [HttpPost]
         public async Task<ActionResult> Login(string email, string senha)
