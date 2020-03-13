@@ -18,15 +18,12 @@ namespace MVCWebPresentationLayer.Models.Insert
         [DisplayName("Preço")]
         [Required(ErrorMessage = "O preço deve ser informado.")]
         public double Preco { get; set; }
-
-        [DisplayName("Classificação")]
+        
         public ClassificacaoIndicativa Calssificacao { get; set; }
         public virtual DesenvolvedorDTO DesenvolvedoraDTO { get; set; }
         public int DesenvolvedoraDTOID { get; set; }
         public virtual GeneroDTO GeneroDTO { get; set; }
         public int GeneroDTOID { get; set; }
-
-        [DisplayName("Data de Lançamento")]
         public DateTime DataLancamento { get; set; }
 
         [DisplayName("Especificações")]
