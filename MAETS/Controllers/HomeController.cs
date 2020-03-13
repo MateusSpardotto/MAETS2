@@ -11,6 +11,7 @@ using BLL.Impl;
 using AutoMapper;
 using MVCWebPresentationLayer.Models.Query;
 using DAO.Interfaces;
+using Common.Extensions;
 
 namespace MAETS.Controllers
 {
@@ -29,22 +30,17 @@ namespace MAETS.Controllers
 
         public async Task<IActionResult> Index()
         {
+            Dev_Gen_QueryViewModel devGenQVM = new Dev_Gen_QueryViewModel();
+
             try
             {
                 List<GeneroDTO> generos = await _generoService.GetGeneros();
                 List<DesenvolvedorDTO> desenvolvedores = await _desenvolvedorService.GetDesenvolvedores();
 
-                var configuration = new MapperConfiguration(cfg =>
-                {
-                    cfg.CreateMap<GeneroDTO, GeneroQueryViewModel>();
-                });
-                IMapper mapper = configuration.CreateMapper();
+                devGenQVM.Generos = generos.ToViewModel<GeneroDTO, GeneroQueryViewModel>();
+                devGenQVM.Desenvolvedores = desenvolvedores.ToViewModel<DesenvolvedorDTO, DesenvolvedorQueryViewModel>();
 
-                //Transforma o ClienteDTO em um ClienteViewModel. (Lista de clientes)
-                //Este objeto "dados" é uma lista de objetos ViewModel.
-                List<GeneroQueryViewModel> dadosGenero = mapper.Map<List<GeneroQueryViewModel>>(generos);
-
-                return View(dadosGenero);
+                return View(devGenQVM);
             }
             catch (Exception)
             {

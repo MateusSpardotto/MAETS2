@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MVCWebPresentationLayer.Models.Query.GeneroQueryViewModel>
+﻿@model MVCWebPresentationLayer.Models.Query.Dev_Gen_QueryViewModel
 
 @{
     ViewData["Title"] = "Home Page";
@@ -8,9 +8,9 @@
         <h1 class="display-4">MAETS</h1><br />
         <h6 class="display-12">Um serviço de jogos que NÃO foi inspirado na STEAM.(Qualquer semelhança é mera conhecidencia)</h6><br />
 
-        <hr/>
+        <hr />
 
-        <table align="left" width="10%" border="1">
+        <table align="left" width="12%" border="1">
             <thead>
                 <tr>
                     <th>
@@ -19,7 +19,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
+                @foreach (var item in Model.Generos)
                 {
                     <tr>
                         <td>
@@ -29,5 +29,27 @@
                 }
             </tbody>
         </table>
+
         <br/>
+
+        <table align="right" width="12%" border="1">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayName("Desenvolvedor")
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Desenvolvedores)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(item.Nome, "Desenvolvedor", new { /* id=item.PrimaryKey */ })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <br />
     </div>
