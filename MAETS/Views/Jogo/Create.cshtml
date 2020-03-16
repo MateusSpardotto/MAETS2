@@ -20,7 +20,7 @@
             <div class="form-group">
                 <label asp-for="Preco" class="control-label"></label>
                 <input asp-for="Preco" class="form-control" />
-                <span asp-validation-for="Preco" class="text-danger"></span>
+                <span asp-validation-for="Preco" name="Preco" id="Preco" class="text-danger"></span>
             </div>
 
             @{
@@ -37,19 +37,19 @@
                         }
                     </select>
                 </div>
-                <span class="text-danger" name="erroClassificaca" id="erroClassificacao"></span>
+                <span class="text-danger" name="erroClassificacao" id="erroClassificacao"></span>
             </div>
 
             
 
             <div class="form-group">
-                <label asp-for="GeneroDTO" class="control-label"></label>
+                <label asp-for="GeneroDTO" class="control-label">Gênero</label>
                 <input asp-for="GeneroDTO" class="form-control" />
                 <span asp-validation-for="GeneroDTO" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="DataLancamento" class="control-label"></label>
+                <label class="control-label col-md-2">Data de Lançamento</label>
                 <input asp-for="DataLancamento" type="date" class="form-control" />
                 <span asp-validation-for="DataLancamento" name="erroDataLancamento" id="erroDataLancamento" class="text-danger"></span>
             </div>
