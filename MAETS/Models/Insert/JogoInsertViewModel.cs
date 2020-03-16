@@ -24,6 +24,7 @@ namespace MVCWebPresentationLayer.Models.Insert
         public int DesenvolvedoraDTOID { get; set; }
         public virtual GeneroDTO GeneroDTO { get; set; }
         public int GeneroDTOID { get; set; }
+        [DisplayName("Data de Lançamento")]
         public DateTime DataLancamento { get; set; }
 
         [DisplayName("Especificações")]
