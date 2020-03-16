@@ -42,5 +42,15 @@ namespace BLL.Impl
         {
             throw new NotImplementedException();
         }
+
+        public string VerificaEmail(string email)
+        {
+            return _usuariorepository.VerificaEmail(email);
+        }
+
+        public string VerificaSenha(string senha)
+        {
+            return _usuariorepository.VerificaSenha(senha);
+        }
     }
 }
