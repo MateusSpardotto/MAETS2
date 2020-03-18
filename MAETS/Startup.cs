@@ -52,7 +52,8 @@ namespace MAETS
             {
                 options.LoginPath = "/Usuario/Login";
                 options.LogoutPath = "/Usuario/LogOff";
-                options.Cookie.Name = "AshProgHelpCookie";
+                options.AccessDeniedPath = "/Home/Index";
+                options.Cookie.Name = "MaetsCookies";
             });
             services.AddMvc();
         }
