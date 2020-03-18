@@ -13,7 +13,7 @@ using MVCWebPresentationLayer.Models.Query;
 
 namespace MVCWebPresentationLayer.Controllers.Genero
 {
-    [Authorize]
+    [Authorize(Roles = "ADM")]
     public class GeneroController : Controller
     {
         private IGeneroService _generoService; 

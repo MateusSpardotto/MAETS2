@@ -96,14 +96,35 @@ namespace MVCWebPresentationLayer.Controllers
 
             if(await _usuarioService.Authenticate(email, senha) != null)
             {
-                var claims = new List<Claim>
+                UsuarioDTO dto = await _usuarioService.Authenticate(email, senha);
+
+                List<Claim> claims = new List<Claim>();
+
+                if (dto.TipoUsuario == DTO.Enums.TipoUsuario.Adm)
                 {
-                    new Claim(ClaimTypes.Name, email)
-                };
+                    claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Role, "ADM")
+                    };
+                }
+                else
+                {
+                    claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Role, "Comum")
+                    };
+                }
+               
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var principal = new ClaimsPrincipal(identity);
-                var props = new AuthenticationProperties();
+                var props = new AuthenticationProperties()
+                {
+                    ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(2),
+
+                };
                 HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, props).Wait();
+                
+                
                 ViewBag.UsuarioLogado = true;
                 return RedirectToAction("Index", "Home");
             }
