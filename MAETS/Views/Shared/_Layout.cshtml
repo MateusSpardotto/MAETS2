@@ -9,9 +9,9 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MAETS</a>
+                <a class="navbar-brand navbar-light" asp-area="" asp-controller="Home" asp-action="Index">MAETS</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,23 +20,23 @@
                     <ul class="navbar-nav flex-grow-1">
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Login">| Login |</a><tr>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Usuario" asp-action="Login">| Login |</a><tr>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Create">| Cadastrar Usuario |</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Usuario" asp-action="Create">| Cadastrar Usuario |</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Desenvolvedor" asp-action="Create">| Cadastrar Desenvolvedora |</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Desenvolvedor" asp-action="Create">| Cadastrar Desenvolvedora |</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Genero" asp-action="Create">| Cadastrar Genero |</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Genero" asp-action="Create">| Cadastrar Genero |</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Jogo" asp-action="Create">| Cadastrar Jogo |</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Jogo" asp-action="Create">| Cadastrar Jogo |</a>
                         </li>
 
                         @if (Context.User.Identity.IsAuthenticated)

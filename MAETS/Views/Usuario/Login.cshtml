@@ -3,38 +3,15 @@
 @{
     ViewData["Title"] = "Login";
 }
-
-    <h1>Login</h1>
-
-    <h4>LoginViewModel</h4>
-    <hr />
-
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="Login">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Email" class="control-label"></label>
-                    <input asp-for="Email" type="email" name="Email" id="Email" placeholder="Email" class="form-control" />
-                    <span asp-validation-for="Email" name="erroEmail" id="erroEmail" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Senha" class="control-label"></label>
-                    <input asp-for="Senha" type="password" name="Senha" id="Senha" placeholder="Senha" class="form-control" />
-                    <span asp-validation-for="Senha" name="erroSenha" id="erroSenha" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-10">
-                        <input name="Login" id="Login" type="submit" value="Login" class="btn btn-primary" />
-                    </div>
-                </div>
-            </form>
-        </div>
+    <div class="login">
+        <h1>Login</h1>
+        <form method="post">
+            <input type="email" name="Email" id="Email" placeholder="Email" required="required" />
+            <input type="password" name="Senha" placeholder="Senha" required="required" />
+            <button type="submit" name="Login" id="Login" class="btn btn-primary btn-block btn-large">Login</button>
+        </form>
     </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <link href="~/css/login.css" rel="stylesheet" />
 
 @section Scripts
 {

@@ -2,6 +2,10 @@
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost/MVCWebPresentationLayer",
+      "sslPort": 0
+    },
     "iisExpress": {
       "applicationUrl": "http://localhost:56070",
       "sslPort": 0
