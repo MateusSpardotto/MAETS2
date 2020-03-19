@@ -38,11 +38,6 @@ namespace BLL.Impl
             return await _jogorepository.GetJogos();
         }
 
-        public async Task<List<JogoDTO>> GetJogosByGenero(GeneroDTO genero)
-        {
-            return await _jogorepository.GetJogosByGenero(genero);
-        }
-
         public Task Update(JogoDTO jogo)
         {
             throw new NotImplementedException();

@@ -19,33 +19,18 @@ namespace MVCWebPresentationLayer.Controllers
     {
         private IJogoService _jogoService;
         private IDesenvolvedorService _desenvolvedorService;
-        private IGeneroService _generoService;
+        private IGeneroService _generosService;
 
         public JogoController(IJogoService jogoService, IDesenvolvedorService desenvolvedorService, IGeneroService generoService)
         {
             this._jogoService = jogoService;
             this._desenvolvedorService = desenvolvedorService;
-            this._generoService = generoService;
+            this._generosService = generoService;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            Dev_Gen_QueryViewModel devGenQVM = new Dev_Gen_QueryViewModel();
-            
-            try
-            {
-                List<GeneroDTO> generos = await _generoService.GetGeneros();
-                List<DesenvolvedorDTO> desenvolvedores = await _desenvolvedorService.GetDesenvolvedores();
-            
-                devGenQVM.Generos = generos.ToViewModel<GeneroDTO, GeneroQueryViewModel>();
-                devGenQVM.Desenvolvedores = desenvolvedores.ToViewModel<DesenvolvedorDTO, DesenvolvedorQueryViewModel>();
-            
-                return View(devGenQVM);
-            }
-            catch (Exception)
-            {
-                return View();
-            }
+            return View();
         }
 
         [HttpPost]
@@ -71,21 +56,18 @@ namespace MVCWebPresentationLayer.Controllers
                 ViewBag.ErrorMessage = ex.Message;
             }
 
-            return RedirectToAction("Home","Index");
+            return View();
         }
+
 
         public async Task<IActionResult> Create()
         {
             List<DesenvolvedorDTO> desenvolvedores = await _desenvolvedorService.GetDesenvolvedores();
-            List<DesenvolvedorQueryViewModel> devVew =
+            //List<GeneroDTO> generos = await _generosService.GetGeneros();
+            List<DesenvolvedorQueryViewModel> data =
                 desenvolvedores.ToViewModel<DesenvolvedorDTO, DesenvolvedorQueryViewModel>();
-            List<GeneroDTO> generos = await _generosService.GetGeneros();
-            List<GeneroQueryViewModel> genView = generos.ToViewModel<GeneroDTO, GeneroQueryViewModel>();
 
-            ViewBag.DevView = devVew;
-            ViewBag.GenView = genView;
 
-            //Dev_Gen_QueryViewModel model = new Dev_Gen_QueryViewModel { Desenvolvedores = devVew, Generos = genView };
             return View();
 
         }
