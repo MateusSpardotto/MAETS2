@@ -14,7 +14,7 @@ using Common.Extensions;
 
 namespace MVCWebPresentationLayer.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "ADM")]
     public class JogoController : Controller
     {
         private IJogoService _jogoService;

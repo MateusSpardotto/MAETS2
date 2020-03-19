@@ -12,7 +12,7 @@ using MVCWebPresentationLayer.Models.Insert;
 
 namespace MVCWebPresentationLayer.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "ADM")]
     public class DesenvolvedorController : Controller
     {
         private IDesenvolvedorService _desenvolvedorService;

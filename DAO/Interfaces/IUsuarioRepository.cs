@@ -12,6 +12,7 @@ namespace DAO.Interfaces
         Task Update(UsuarioDTO usuario);
         Task Delete(UsuarioDTO usuario);
         Task<UsuarioDTO> Authenticate(string email, string password);
+        Task<UsuarioDTO> GetUserForEmail(string email);
         string VerificaEmail(string email);
         string VerificaSenha(string senha);
 

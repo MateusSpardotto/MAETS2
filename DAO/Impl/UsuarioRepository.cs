@@ -52,6 +52,16 @@ namespace DAO
             }
         }
 
+        public async Task<UsuarioDTO> GetUserForEmail(string email)
+        {
+            UsuarioDTO user = await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == email);
+            if (user == null)
+            {
+                throw new Exception("Usuario não encontrado");
+            }
+            return user;
+        }
+
         public Task Update(UsuarioDTO usuario)
         {
             throw new NotImplementedException();
@@ -59,7 +69,7 @@ namespace DAO
 
         public string VerificaEmail(string email)
         {
-            var user = _context.Usuarios.FirstOrDefault(p => p.Email == email);
+            var user = _context.Usuarios.FirstAsync(p => p.Email == email);
             if (user == null)
             {
                 return "Email inexistente e/ou incorreto na base de dados.";

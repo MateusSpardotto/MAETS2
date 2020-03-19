@@ -14,6 +14,7 @@ using DTO;
 using Microsoft.AspNetCore.Mvc;
 using MVCWebPresentationLayer.Models.Insert;
 using Microsoft.AspNetCore.Authentication;
+using MVCWebPresentationLayer.Models.Query;
 
 namespace MVCWebPresentationLayer.Controllers
 {
@@ -89,21 +90,46 @@ namespace MVCWebPresentationLayer.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Login(string email, string senha)
+        public async Task<IActionResult> Login(string email, string senha)
         {
 
            //this.User.Identity.
 
             if(await _usuarioService.Authenticate(email, senha) != null)
             {
-                var claims = new List<Claim>
+                UsuarioDTO dto = await _usuarioService.Authenticate(email, senha);
+
+                List<Claim> claims = new List<Claim>();
+
+                if (dto.TipoUsuario == DTO.Enums.TipoUsuario.Adm)
                 {
-                    new Claim(ClaimTypes.Name, email)
-                };
+                    claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Role, "ADM"),
+                        new Claim(ClaimTypes.Name, dto.Email),
+                        new Claim(ClaimTypes.Email, dto.Email)
+                    };
+                }
+                else
+                {
+                    claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Role, "Comum"),
+                        new Claim(ClaimTypes.Name, dto.Email),
+                        new Claim(ClaimTypes.Email, dto.Email)
+                    };
+                }
+               
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var principal = new ClaimsPrincipal(identity);
-                var props = new AuthenticationProperties();
+                var props = new AuthenticationProperties()
+                {
+                    ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(2),
+
+                };
                 HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, props).Wait();
+                
+                
                 ViewBag.UsuarioLogado = true;
                 return RedirectToAction("Index", "Home");
             }
@@ -112,6 +138,19 @@ namespace MVCWebPresentationLayer.Controllers
                 return View();
             }
 
+        }
+        [HttpPost]
+        public async Task<IActionResult> Procurar(string searchString)
+        {
+            UsuarioDTO user = await _usuarioService.GetUserForEmail(searchString);
+            var configuration = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<UsuarioDTO, UsuarioPerfilViewModel>();
+            });
+            IMapper mapper = configuration.CreateMapper();
+            UsuarioPerfilViewModel usuario = mapper.Map<UsuarioPerfilViewModel>(user);
+
+            return View(usuario);
         }
 
         [HttpPost]
