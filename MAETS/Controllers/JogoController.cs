@@ -56,18 +56,22 @@ namespace MVCWebPresentationLayer.Controllers
                 ViewBag.ErrorMessage = ex.Message;
             }
 
-            return View();
+            return RedirectToAction("Home","Index");
         }
 
 
         public async Task<IActionResult> Create()
         {
             List<DesenvolvedorDTO> desenvolvedores = await _desenvolvedorService.GetDesenvolvedores();
-            //List<GeneroDTO> generos = await _generosService.GetGeneros();
-            List<DesenvolvedorQueryViewModel> data =
+            List<DesenvolvedorQueryViewModel> devVew =
                 desenvolvedores.ToViewModel<DesenvolvedorDTO, DesenvolvedorQueryViewModel>();
+            List<GeneroDTO> generos = await _generosService.GetGeneros();
+            List<GeneroQueryViewModel> genView = generos.ToViewModel<GeneroDTO, GeneroQueryViewModel>();
 
+            ViewBag.DevView = devVew;
+            ViewBag.GenView = genView;
 
+            //Dev_Gen_QueryViewModel model = new Dev_Gen_QueryViewModel { Desenvolvedores = devVew, Generos = genView };
             return View();
 
         }

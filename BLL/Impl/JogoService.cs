@@ -38,6 +38,7 @@ namespace BLL.Impl
             return await _jogorepository.GetJogos();
         }
 
+
         public Task Update(JogoDTO jogo)
         {
             throw new NotImplementedException();
