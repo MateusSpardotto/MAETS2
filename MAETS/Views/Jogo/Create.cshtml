@@ -3,64 +3,87 @@
 @{
     ViewData["Title"] = "Create";
 }
-<h1 style="color: #ffff">Cadastrar Jogo</h1>
+
+<h1>Create</h1>
+
+<h4>JogoInsertViewModel</h4>
+<hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Nome" class="control-label" style="color: #ffff"></label>
+                <label asp-for="Nome" class="control-label"></label>
                 <input asp-for="Nome" class="form-control" />
-                <span asp-validation-for="Nome" name="erroNome" id="erroNome" class="text-danger"></span>
+                <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Preco" class="control-label" style="color: #ffff">Preço</label>
+                <label asp-for="Preco" class="control-label"></label>
                 <input asp-for="Preco" class="form-control" />
-                <span asp-validation-for="Preco" name="erroPreco" id="erroPreco" class="text-danger"></span>
+                <span asp-validation-for="Preco" class="text-danger"></span>
             </div>
 
             @{
-                string[] classificacao = Enum.GetNames(typeof(DTO.Enums.ClassificacaoIndicativa));
+                string[] Classificacao = Enum.GetNames(typeof(DTO.Enums.ClassificacaoIndicativa));
             }
 
             <div class="form-group">
-                <label class="control-label col-md-2" style="color: #ffff">Classificação</label>
+                <label class="control-label col-md-2">Classificação</label>
                 <div class="col-md-10">
                     <select class="form-control" name="Classificacao" id="Classificacao">
-                        @for (int i = 0; i < classificacao.Length; i++)
+                        @for (int i = 0; i < Classificacao.Length; i++)
                         {
-                        <option value="@i">@classificacao[i]</option>
+                            <option value="@i">@Classificacao[i]</option>
                         }
                     </select>
                 </div>
-                <span class="text-danger" name="erroClassificacao" id="erroClassificacao"></span>
-            </div>
-
-            
-
-            <div class="form-group">
-                <label asp-for="GeneroDTO" id="Genero" class="control-label" style="color: #ffff">Gênero</label>
-                <input asp-for="GeneroDTO" class="form-control" />
-                <span asp-validation-for="GeneroDTO" name="erroGenero" id="erroGenero" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="DataLancamento" class="control-label" style="color: #ffff"></label>
-                <input asp-for="DataLancamento" type="date" class="form-control" />
-                <span asp-validation-for="DataLancamento" name="erroDataLancamento" id="erroDataLancamento" class="text-danger"></span>
+                <label class="control-label col-md-2">Desenvolvedora</label>
+                <div class="col-md-10">
+                    <select class="form-control" name="DesenvolvedorDTOID" id="DesenvolvedorDTOID">
+                        @for (int i = 0; i < ViewBag.DevView.Count; i++)
+                        {
+                            <option value="@ViewBag.DevView[i].ID">@ViewBag.DevView[i].Nome</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Genero</label>
+                <div class="col-md-10">
+                    <select class="form-control" name="GeneroDTOID" id="GeneroDTOID">
+                        @for (int i = 0; i < ViewBag.GenView.Count; i++)
+                        {
+                            <option value="@ViewBag.GenView[i].ID">@ViewBag.GenView[i].Nome</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="DataLancamento" class="control-label"></label>
+                <input asp-for="DataLancamento" class="form-control" type="date" />
+                <span asp-validation-for="DataLancamento" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Especificacoes" class="control-label" style="color: #ffff">Especificações</label>
+                <label asp-for="Especificacoes" class="control-label"></label>
                 <input asp-for="Especificacoes" class="form-control" />
-                <span asp-validation-for="Especificacoes" name="erroEspecificacoes" id="erroEspecificacoes" class="text-danger"></span>
+                <span asp-validation-for="Especificacoes" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" id="Create" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
 
 @section Scripts{
     <script type="text/javascript">
@@ -134,10 +157,10 @@
                     sucesso = false;
                 }
 
-                 if (!sucesso) {
+                if (!sucesso) {
                     e.preventDefault();
-                 }
+                }
             });
         });
     </script>
- }
+}
