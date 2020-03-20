@@ -6,27 +6,21 @@
     <title>@ViewData["Title"] - MAETS</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/css/header.css" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
-            <div>
-
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand navbar-light" asp-area="" asp-controller="Home" asp-action="Index">MAETS</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" style="margin-left: 628px">
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
 
                         <li class="nav-item">
-                            <a asp-area="" asp-controller="Home" asp-action="Index"><img src="~/images/MAETS.png" width="50px" height="50px" /></a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Usuario" asp-action="Login">| Login |</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Usuario" asp-action="Login">| Login |</a><tr>
                         </li>
 
                         <li class="nav-item">
@@ -44,11 +38,6 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Jogo" asp-action="Create">| Cadastrar Jogo |</a>
                         </li>
-
-                        <form method="post" asp-controller="Usuario" asp-action="Procurar">
-                            <input type="text" placeholder="user@gmail.com" name="SearchString">
-                            <button type="submit">Pesquisar</button>
-                        </form>
 
                         @if (Context.User.Identity.IsAuthenticated)
                         {

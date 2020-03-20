@@ -67,7 +67,7 @@ namespace DAO.Migrations
                     b.Property<DateTime>("DataLancamento")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DesenvolvedorDTOID")
+                    b.Property<int>("DesenvolvedoraDTOID")
                         .HasColumnType("int");
 
                     b.Property<string>("Especificacoes")
@@ -86,7 +86,7 @@ namespace DAO.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("DesenvolvedorDTOID");
+                    b.HasIndex("DesenvolvedoraDTOID");
 
                     b.HasIndex("GeneroDTOID");
 
@@ -147,9 +147,9 @@ namespace DAO.Migrations
 
             modelBuilder.Entity("DTO.JogoDTO", b =>
                 {
-                    b.HasOne("DTO.DesenvolvedorDTO", "DesenvolvedorDTO")
+                    b.HasOne("DTO.DesenvolvedorDTO", "DesenvolvedoraDTO")
                         .WithMany("Jogos")
-                        .HasForeignKey("DesenvolvedorDTOID")
+                        .HasForeignKey("DesenvolvedoraDTOID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 

@@ -38,11 +38,6 @@ namespace BLL.Impl
             await _usuariorepository.Delete(usuario);
         }
 
-        public async Task<UsuarioDTO> GetUserForEmail(string email)
-        {
-            return await _usuariorepository.GetUserForEmail(email);
-        }
-
         public Task Update(UsuarioDTO usuario)
         {
             throw new NotImplementedException();

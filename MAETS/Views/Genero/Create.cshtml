@@ -3,16 +3,13 @@
 @{
     ViewData["Title"] = "Create";
 }
-
-<h1>Create</h1>
-
-<hr />
+<h1 style="color: #ffff">Cadastrar Gênero</h1>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Nome" class="control-label">Gênero</label>
+                <label asp-for="Nome" class="control-label" style="color: #ffff">Gênero</label>
                 <input asp-for="Nome" class="form-control" />
                 <span asp-validation-for="Nome" class="text-danger" name="erroNome" id="erroNome"></span>
             </div>

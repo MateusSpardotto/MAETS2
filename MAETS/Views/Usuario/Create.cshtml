@@ -3,27 +3,23 @@
 @{
     ViewData["Title"] = "Create";
 }
-
-<h1>Cadastre-se</h1>
-
-
-<hr />
+<h1 style="color:#fff">Cadastre-se</h1>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Nome" class="control-label"></label>
+                <label asp-for="Nome" class="control-label" style="color: #ffff"></label>
                 <input asp-for="Nome" class="form-control" />
                 <span class="text-danger" name="erroNome" id="erroNome"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CPF" class="control-label"></label>
+                <label asp-for="CPF" class="control-label" style="color: #ffff"></label>
                 <input asp-for="CPF" class="form-control" />
                 <span asp-validation-for="CPF" name="erroCPF" id="erroCPF" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DataNascimento" class="control-label"></label>
+                <label asp-for="DataNascimento" class="control-label" style="color: #ffff"></label>
                 <input asp-for="DataNascimento" type="date" class="form-control"  />
                 <span asp-validation-for="DataNascimento" name="erroDataNascimento" id="erroDataNascimento" class="text-danger"></span>
             </div>
@@ -33,7 +29,7 @@
             }
 
             <div class="form-group">
-                <label asp-for="TipoUsuario" class="control-label"></label>
+                <label asp-for="TipoUsuario" class="control-label" style="color: #ffff"></label>
                 <div class="col-md-10">
                     <select class="form-control" name="TipoUsuario" id="TipoUsuario">
                         @for (int i = 0; i < tipoUsuario.Length; i++)
@@ -50,7 +46,7 @@
             }
 
             <div class="form-group">
-                <label class="control-label col-md-2">País</label>
+                <label class="control-label col-md-2" style="color: #ffff">País</label>
                 <div class="col-md-10">
                     <select class="form-control" name="Pais" id="Pais">
                         @for (int i = 0; i < paises.Length; i++)
@@ -63,17 +59,17 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
+                <label asp-for="Email" class="control-label" style="color: #ffff"></label>
                 <input asp-for="Email" type="email" name="Email" id="Email" placeholder="Email" class="form-control" />
                 <span asp-validation-for="Email" name="erroEmail" id="erroEmail" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Senha" class="control-label"></label>
+                <label asp-for="Senha" class="control-label" style="color: #ffff"></label>
                 <input asp-for="Senha" type="password" name="Senha" id="Senha" placeholder="Senha" class="form-control" />
                 <span asp-validation-for="Senha" name="erroSenha" id="erroSenha" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Confirmar_Senha" class="control-label"></label>
+                <label asp-for="Confirmar_Senha" class="control-label" style="color: #ffff"></label>
                 <input asp-for="Confirmar_Senha" type="password" name="Confirmar_Senha" id="Confirmar_Senha" placeholder="Confirmar Senha" class="form-control" />
                 <span class="text-danger" name="erroConfirmar_Senha" id="erroConfirmar_Senha"></span>
             </div>

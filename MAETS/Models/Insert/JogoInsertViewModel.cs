@@ -20,9 +20,10 @@ namespace MVCWebPresentationLayer.Models.Insert
         public double Preco { get; set; }
         
         public ClassificacaoIndicativa Calssificacao { get; set; }
-        public int DesenvolvedorDTOID { get; set; }
+        public virtual DesenvolvedorDTO DesenvolvedoraDTO { get; set; }
+        public int DesenvolvedoraDTOID { get; set; }
+        public virtual GeneroDTO GeneroDTO { get; set; }
         public int GeneroDTOID { get; set; }
-        
         [DisplayName("Data de Lançamento")]
         public DateTime DataLancamento { get; set; }
 
