@@ -79,7 +79,7 @@ namespace MVCWebPresentationLayer.Controllers
             List<DesenvolvedorDTO> desenvolvedores = await _desenvolvedorService.GetDesenvolvedores();
             List<DesenvolvedorQueryViewModel> devVew =
                 desenvolvedores.ToViewModel<DesenvolvedorDTO, DesenvolvedorQueryViewModel>();
-            List<GeneroDTO> generos = await _generosService.GetGeneros();
+            List<GeneroDTO> generos = await _generoService.GetGeneros();
             List<GeneroQueryViewModel> genView = generos.ToViewModel<GeneroDTO, GeneroQueryViewModel>();
 
             ViewBag.DevView = devVew;

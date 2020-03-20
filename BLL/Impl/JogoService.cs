@@ -38,9 +38,9 @@ namespace BLL.Impl
             return await _jogorepository.GetJogos();
         }
 
-        public async Task<List<JogoDTO>> GetJogosByGenero(GeneroDTO genero)
+        public async Task<List<JogoDTO>> GetJogosByGenero(int generoID)
         {
-            return await _jogorepository.GetJogosByGenero(genero);
+            return await _jogorepository.GetJogosByGenero(generoID);
         }
 
         public Task Update(JogoDTO jogo)

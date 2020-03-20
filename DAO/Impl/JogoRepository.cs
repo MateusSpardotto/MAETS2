@@ -46,9 +46,9 @@ namespace DAO.Impl
             return await _context.Jogos.ToListAsync();
         }
 
-        public async Task<List<JogoDTO>> GetJogosByGenero(GeneroDTO genero)
+        public async Task<List<JogoDTO>> GetJogosByGenero(int generoID)
         {
-            return await _context.Jogos.Where(j => j.GeneroDTOID == genero.ID).ToListAsync();
+            return await _context.Jogos.Where(j => j.GeneroDTOID == generoID).ToListAsync();
         }
 
         public Task Update(JogoDTO jogo)
