@@ -12,7 +12,7 @@ namespace DTO
         public double Preco { get; set; }
         public ClassificacaoIndicativa Calssificacao { get; set; }
         public virtual DesenvolvedorDTO DesenvolvedorDTO { get; set; }
-        public int DesenvolvedoraDTOID { get; set; }
+        public int DesenvolvedorDTOID { get; set; }
         public virtual GeneroDTO GeneroDTO { get; set; }
         public int GeneroDTOID { get; set; }
         public DateTime DataLancamento { get; set; }
