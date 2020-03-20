@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAO.Migrations
 {
     [DbContext(typeof(MContext))]
-    [Migration("20200319181911_InitialDatabase")]
-    partial class InitialDatabase
+    [Migration("20200320181218_initialDataBase")]
+    partial class initialDataBase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -69,7 +69,7 @@ namespace DAO.Migrations
                     b.Property<DateTime>("DataLancamento")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DesenvolvedorDTOID")
+                    b.Property<int>("DesenvolvedoraDTOID")
                         .HasColumnType("int");
 
                     b.Property<string>("Especificacoes")
@@ -88,7 +88,7 @@ namespace DAO.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("DesenvolvedorDTOID");
+                    b.HasIndex("DesenvolvedoraDTOID");
 
                     b.HasIndex("GeneroDTOID");
 
@@ -149,9 +149,9 @@ namespace DAO.Migrations
 
             modelBuilder.Entity("DTO.JogoDTO", b =>
                 {
-                    b.HasOne("DTO.DesenvolvedorDTO", "DesenvolvedorDTO")
+                    b.HasOne("DTO.DesenvolvedorDTO", "DesenvolvedoraDTO")
                         .WithMany("Jogos")
-                        .HasForeignKey("DesenvolvedorDTOID")
+                        .HasForeignKey("DesenvolvedoraDTOID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 

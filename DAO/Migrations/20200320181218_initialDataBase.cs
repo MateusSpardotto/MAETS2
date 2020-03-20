@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DAO.Migrations
 {
-    public partial class InitialDatabase : Migration
+    public partial class initialDataBase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -62,7 +62,7 @@ namespace DAO.Migrations
                     Nome = table.Column<string>(unicode: false, nullable: true),
                     Preco = table.Column<double>(nullable: false),
                     Calssificacao = table.Column<int>(nullable: false),
-                    DesenvolvedorDTOID = table.Column<int>(nullable: false),
+                    DesenvolvedoraDTOID = table.Column<int>(nullable: false),
                     GeneroDTOID = table.Column<int>(nullable: false),
                     DataLancamento = table.Column<DateTime>(nullable: false),
                     Especificacoes = table.Column<string>(unicode: false, nullable: true)
@@ -71,8 +71,8 @@ namespace DAO.Migrations
                 {
                     table.PrimaryKey("PK_Jogos", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Jogos_Desenvolvedoras_DesenvolvedorDTOID",
-                        column: x => x.DesenvolvedorDTOID,
+                        name: "FK_Jogos_Desenvolvedoras_DesenvolvedoraDTOID",
+                        column: x => x.DesenvolvedoraDTOID,
                         principalTable: "Desenvolvedoras",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
@@ -109,9 +109,9 @@ namespace DAO.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Jogos_DesenvolvedorDTOID",
+                name: "IX_Jogos_DesenvolvedoraDTOID",
                 table: "Jogos",
-                column: "DesenvolvedorDTOID");
+                column: "DesenvolvedoraDTOID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Jogos_GeneroDTOID",

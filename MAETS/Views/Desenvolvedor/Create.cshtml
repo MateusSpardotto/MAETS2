@@ -3,16 +3,13 @@
 @{
     ViewData["Title"] = "Create";
 }
-
-<h1>Create</h1>
-
-<hr />
+<h1 style="color: #ffff">Cadastrar Desenvolvedora</h1>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Nome" class="control-label"></label>
+                <label asp-for="Nome" class="control-label" style="color: #ffff"></label>
                 <input asp-for="Nome" class="form-control" />
                 <span name="erroNome" id="erroNome" class="text-danger"></span>
             </div>
@@ -22,7 +19,7 @@
             }
 
             <div class="form-group">
-                <label class="control-label col-md-2">PaisOrigem</label>
+                <label class="control-label col-md-2" style="color: #ffff">PaisOrigem</label>
                 <div class="col-md-10">
                     <select class="form-control" name="PaisOrigem" id="PaisOrigem">
                         @for (int i = 0; i < paises.Length; i++)
