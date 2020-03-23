@@ -76,19 +76,17 @@ namespace MVCWebPresentationLayer.Controllers
 
         public async Task<IActionResult> Create()
         {
-                List<DesenvolvedorDTO> desenvolvedores = await _desenvolvedorService.GetDesenvolvedores();
-                List<DesenvolvedorQueryViewModel> devVew =
-                    desenvolvedores.ToViewModel<DesenvolvedorDTO, DesenvolvedorQueryViewModel>();
-                List<GeneroDTO> generos = await _generoService.GetGeneros();
-                List<GeneroQueryViewModel> genView = generos.ToViewModel<GeneroDTO, GeneroQueryViewModel>();
+            List<DesenvolvedorDTO> desenvolvedores = await _desenvolvedorService.GetDesenvolvedores();
+            List<DesenvolvedorQueryViewModel> devVew =
+                desenvolvedores.ToViewModel<DesenvolvedorDTO, DesenvolvedorQueryViewModel>();
+            List<GeneroDTO> generos = await _generoService.GetGeneros();
+            List<GeneroQueryViewModel> genView = generos.ToViewModel<GeneroDTO, GeneroQueryViewModel>();
 
-                ViewBag.DevView = devVew;
-                ViewBag.GenView = genView;
+            ViewBag.DevView = devVew;
+            ViewBag.GenView = genView;
 
-                //Dev_Gen_QueryViewModel model = new Dev_Gen_QueryViewModel { Desenvolvedores = devVew, Generos = genView };
-                return View();
+            //Dev_Gen_QueryViewModel model = new Dev_Gen_QueryViewModel { Desenvolvedores = devVew, Generos = genView };
+            return View();
         }
-
-
     }
 }

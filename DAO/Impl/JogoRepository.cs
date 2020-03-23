@@ -51,6 +51,11 @@ namespace DAO.Impl
             return await _context.Jogos.Where(j => j.GeneroDTOID == generoID).ToListAsync();
         }
 
+        public async Task<List<JogoDTO>> GetJogosByDesenvolvedor(int desenvolvedorID)
+        {
+            return await _context.Jogos.Where(j => j.DesenvolvedorDTOID == desenvolvedorID).ToListAsync();
+        }
+
         public Task Update(JogoDTO jogo)
         {
             throw new NotImplementedException();

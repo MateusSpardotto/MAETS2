@@ -13,5 +13,6 @@ namespace DAO.Interfaces
         Task Delete(JogoDTO jogo);
         Task<List<JogoDTO>> GetJogos();
         Task<List<JogoDTO>> GetJogosByGenero(int generoID);
+        Task<List<JogoDTO>> GetJogosByDesenvolvedor(int desenvolvedorID);
     }
 }

@@ -62,10 +62,16 @@ namespace MAETS.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        
         public async Task<IActionResult> FilterForGen(int generoID)
          {
             List<JogoDTO> jogosDTO = await _jogoService.GetJogosByGenero(generoID);
+            List<JogoInsertViewModel> jogosView = jogosDTO.ToViewModel<JogoDTO, JogoInsertViewModel>();
+            return View(jogosView);
+        }
+
+        public async Task<IActionResult> FilterForDev(int desenvolvedorID)
+        {
+            List<JogoDTO> jogosDTO = await _jogoService.GetJogosByDesenvolvedor(desenvolvedorID);
             List<JogoInsertViewModel> jogosView = jogosDTO.ToViewModel<JogoDTO, JogoInsertViewModel>();
             return View(jogosView);
         }
