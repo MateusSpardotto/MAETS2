@@ -61,7 +61,7 @@ namespace DAO.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Calssificacao")
+                    b.Property<int>("Classificacao")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DataLancamento")

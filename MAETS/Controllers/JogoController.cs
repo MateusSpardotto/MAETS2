@@ -60,7 +60,6 @@ namespace MVCWebPresentationLayer.Controllers
                 IMapper mapperJogo = configurationJogo.CreateMapper();
                 JogoDTO jogo = mapperJogo.Map<JogoDTO>(viewModel);
                 await _jogoService.Create(jogo);
-
             }
             catch (MSException ex)
             {

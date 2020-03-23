@@ -11,7 +11,7 @@ namespace MVCWebPresentationLayer.Models.Query
     {
         public string Nome { get; set; }
         public double Preco { get; set; }
-        public ClassificacaoIndicativa Calssificacao { get; set; }
+        public ClassificacaoIndicativa Classificacao { get; set; }
 
         [DisplayName("Desenvolvedor")]
         public string DesenvolvedorDTONome { get; set; }

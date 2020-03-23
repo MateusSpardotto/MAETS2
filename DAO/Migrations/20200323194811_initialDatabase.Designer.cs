@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAO.Migrations
 {
     [DbContext(typeof(MContext))]
-    [Migration("20200320192934_initialDatabase")]
+    [Migration("20200323194811_initialDatabase")]
     partial class initialDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -63,7 +63,7 @@ namespace DAO.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Calssificacao")
+                    b.Property<int>("Classificacao")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DataLancamento")

@@ -10,7 +10,7 @@ namespace DTO
         public int ID { get; set; }
         public string Nome { get; set; }
         public double Preco { get; set; }
-        public ClassificacaoIndicativa Calssificacao { get; set; }
+        public ClassificacaoIndicativa Classificacao { get; set; }
         public virtual DesenvolvedorDTO DesenvolvedorDTO { get; set; }
         public int DesenvolvedorDTOID { get; set; }
         public virtual GeneroDTO GeneroDTO { get; set; }

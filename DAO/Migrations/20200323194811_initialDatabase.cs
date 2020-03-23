@@ -61,7 +61,7 @@ namespace DAO.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(unicode: false, nullable: true),
                     Preco = table.Column<double>(nullable: false),
-                    Calssificacao = table.Column<int>(nullable: false),
+                    Classificacao = table.Column<int>(nullable: false),
                     DesenvolvedorDTOID = table.Column<int>(nullable: false),
                     GeneroDTOID = table.Column<int>(nullable: false),
                     DataLancamento = table.Column<DateTime>(nullable: false),
