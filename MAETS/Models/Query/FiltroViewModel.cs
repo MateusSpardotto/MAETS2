@@ -9,6 +9,7 @@ namespace MVCWebPresentationLayer.Models.Query
 {
     public class FiltroViewModel
     {
+        public int ID { get; set; }
         public string Nome { get; set; }
         public double Preco { get; set; }
         public ClassificacaoIndicativa Classificacao { get; set; }

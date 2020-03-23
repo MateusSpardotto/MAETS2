@@ -4,7 +4,7 @@
     ViewData["Title"] = "FilterForGen";
 }
 
-<h1 style="text-align:center">Selecione um jogo para compra.</h1>
+<h1 style="text-align:center">Clique no nome do jogo para compra-lo.</h1>
 
 <table class="table">
     <thead>
@@ -34,30 +34,31 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                <span>@item.Preco R$</span>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Classificacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DesenvolvedorDTONome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GeneroDTONome)
-            </td>
-            <td>
-                <span>@item.DataLancamento.ToString("dd/MM/yyyy")</span>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Especificacoes)
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.Nome, "ComprarJogo", "Compra", routeValues: new { jogoID = item.ID }, htmlAttributes: null)
+                </td>
+                <td>
+                    <span>@item.Preco R$</span>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Classificacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DesenvolvedorDTONome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GeneroDTONome)
+                </td>
+                <td>
+                    <span>@item.DataLancamento.ToString("dd/MM/yyyy")</span>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Especificacoes)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
