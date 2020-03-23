@@ -20,7 +20,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="DataNascimento" class="control-label" style="color: #ffff"></label>
-                <input asp-for="DataNascimento" type="date" class="form-control"  />
+                <input asp-for="DataNascimento" type="date" class="form-control" />
                 <span asp-validation-for="DataNascimento" name="erroDataNascimento" id="erroDataNascimento" class="text-danger"></span>
             </div>
 
@@ -33,9 +33,9 @@
                 <div class="col-md-10">
                     <select class="form-control" name="TipoUsuario" id="TipoUsuario">
                         @for (int i = 0; i < tipoUsuario.Length; i++)
-                         {
+                        {
                             <option value="@i">@tipoUsuario[i]</option>
-                         }
+                        }
                     </select>
                     <span class="text-danger" name="erroTipoUsuario" id="erroTipoUsuario"></span>
                 </div>
@@ -83,14 +83,14 @@
 </div>
 
 
-@section Scripts 
+@section Scripts
 {
     <script type="text/javascript">
         $(document).ready(function () {
             var cpfMask = $("#CPF");
             cpfMask.mask('000.000.000-00', { reverse: false });
             $("#ButtonCreate").click(function (e) {
-                
+
                 var nome = $("#Nome").val();
                 var cpf = $("#CPF").val();
                 var dataNascimento = $("#DataNascimento").val();
