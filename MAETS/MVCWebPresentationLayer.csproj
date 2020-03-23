@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Teste de Forms\**" />
+    <Content Remove="Teste de Forms\**" />
+    <EmbeddedResource Remove="Teste de Forms\**" />
+    <None Remove="Teste de Forms\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\images\MAETS.png" />
   </ItemGroup>
 
