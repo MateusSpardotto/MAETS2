@@ -1,14 +1,11 @@
-﻿@model IEnumerable<MVCWebPresentationLayer.Models.Insert.JogoInsertViewModel>
+﻿@model IEnumerable<MVCWebPresentationLayer.Models.Query.FiltroViewModel>
 
 @{
     ViewData["Title"] = "FilterForDev";
 }
 
-<h1>FilterForDev</h1>
+<h1 style="text-align:center">Selecione um jogo para compra.</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -22,10 +19,10 @@
                 @Html.DisplayNameFor(model => model.Calssificacao)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DesenvolvedorDTOID)
+                @Html.DisplayNameFor(model => model.DesenvolvedorDTONome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GeneroDTOID)
+                @Html.DisplayNameFor(model => model.GeneroDTONome)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DataLancamento)
@@ -43,27 +40,22 @@
                 @Html.DisplayFor(modelItem => item.Nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Preco)
+                <span>@item.Preco R$</span>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Calssificacao)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DesenvolvedorDTOID)
+                @Html.DisplayFor(modelItem => item.DesenvolvedorDTONome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.GeneroDTOID)
+                @Html.DisplayFor(modelItem => item.GeneroDTONome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DataLancamento)
+                <span>@item.DataLancamento.ToString("dd/MM/yyyy")</span>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Especificacoes)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
 }

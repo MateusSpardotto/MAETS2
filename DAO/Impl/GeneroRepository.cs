@@ -46,6 +46,12 @@ namespace DAO.Impl
             return await _context.Generos.ToListAsync();
         }
 
+        public async Task<string> GetGeneroById(int GeneroId)
+        {
+            GeneroDTO DbG = await _context.Generos.FirstOrDefaultAsync(g => g.ID == GeneroId);
+            return DbG.Nome;
+        }
+
         public Task Update(GeneroDTO genero)
         {
             throw new NotImplementedException();

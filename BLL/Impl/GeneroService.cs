@@ -38,6 +38,11 @@ namespace BLL.Impl
             return await _generorepository.GetGeneros();
         }
 
+        public async Task<string> GetGeneroById(int GeneroId)
+        {
+            return await _generorepository.GetGeneroById(GeneroId);
+        }
+
         public Task Update(GeneroDTO genero)
         {
             throw new NotImplementedException();

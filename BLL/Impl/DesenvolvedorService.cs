@@ -31,6 +31,11 @@ namespace BLL.Impl
             await _desenvolvedorrepository.Delete(desenvolvedor);
         }
 
+        public async Task<string> GetDesenvolvedorById(int desebvolvedorId)
+        {
+            return await _desenvolvedorrepository.GetDesenvolvedorById(desebvolvedorId);
+        }
+
         public async Task<List<DesenvolvedorDTO>> GetDesenvolvedores()
         {
             return await _desenvolvedorrepository.GetDesenvolvedores();
