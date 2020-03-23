@@ -48,7 +48,7 @@
                 {
                     <tr>
                         <td>
-                            @Html.ActionLink(item.Nome, "Genero", new {/*id=item.PrimaryKey*/})
+                            @Html.ActionLink(item.Nome, "FilterForGen", "Home", routeValues: new { generoID = item.ID }, htmlAttributes: null)
                         </td>
                     </tr>
                 }
@@ -68,7 +68,7 @@
                 {
                     <tr>
                         <td>
-                            @Html.ActionLink(item.Nome, "Desenvolvedor", new { /* id=item.PrimaryKey */ })
+                            @Html.ActionLink(item.Nome, "FilterForDev", "Home", routeValues: new { desenvolvedorID = item.ID }, htmlAttributes: null)
                         </td>
                     </tr>
                 }

@@ -11,7 +11,7 @@ namespace DAO.Mappings
     {
         public void Configure(EntityTypeBuilder<DesenvolvedorDTO> builder)
         {
-            builder.ToTable("DESENVOLVEDORES");
+            builder.ToTable("DESENVOLVEDORAS");
             builder.Property(d => d.Nome)
                 .HasMaxLength(150)
                 .IsRequired();

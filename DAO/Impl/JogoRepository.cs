@@ -3,6 +3,7 @@ using DTO;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -43,6 +44,16 @@ namespace DAO.Impl
         public async Task<List<JogoDTO>> GetJogos()
         {
             return await _context.Jogos.ToListAsync();
+        }
+
+        public async Task<List<JogoDTO>> GetJogosByGenero(int generoID)
+        {
+            return await _context.Jogos.Where(j => j.GeneroDTOID == generoID).ToListAsync();
+        }
+
+        public async Task<List<JogoDTO>> GetJogosByDesenvolvedor(int desenvolvedorID)
+        {
+            return await _context.Jogos.Where(j => j.DesenvolvedorDTOID == desenvolvedorID).ToListAsync();
         }
 
         public Task Update(JogoDTO jogo)

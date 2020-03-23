@@ -12,6 +12,7 @@ using AutoMapper;
 using MVCWebPresentationLayer.Models.Query;
 using DAO.Interfaces;
 using Common.Extensions;
+using MVCWebPresentationLayer.Models.Insert;
 
 namespace MAETS.Controllers
 {
@@ -20,12 +21,14 @@ namespace MAETS.Controllers
         private readonly ILogger<HomeController> _logger;
         private IGeneroService _generoService;
         private IDesenvolvedorService _desenvolvedorService;
+        private IJogoService _jogoService;
 
-        public HomeController(ILogger<HomeController> logger, IGeneroService generoService, IDesenvolvedorService desenvolvedorService)
+        public HomeController(ILogger<HomeController> logger, IGeneroService generoService, IDesenvolvedorService desenvolvedorService, IJogoService jogoService)
         {
             this._logger = logger;
-            this._generoService = generoService;
+            this._generoService = generoService; 
             this._desenvolvedorService = desenvolvedorService;
+            this._jogoService = jogoService;
         }
 
         public async Task<IActionResult> Index()
@@ -57,6 +60,20 @@ namespace MAETS.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public async Task<IActionResult> FilterForGen(int generoID)
+         {
+            List<JogoDTO> jogosDTO = await _jogoService.GetJogosByGenero(generoID);
+            List<JogoInsertViewModel> jogosView = jogosDTO.ToViewModel<JogoDTO, JogoInsertViewModel>();
+            return View(jogosView);
+        }
+
+        public async Task<IActionResult> FilterForDev(int desenvolvedorID)
+        {
+            List<JogoDTO> jogosDTO = await _jogoService.GetJogosByDesenvolvedor(desenvolvedorID);
+            List<JogoInsertViewModel> jogosView = jogosDTO.ToViewModel<JogoDTO, JogoInsertViewModel>();
+            return View(jogosView);
         }
     }
 }
