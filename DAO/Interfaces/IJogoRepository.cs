@@ -12,6 +12,7 @@ namespace DAO.Interfaces
         Task Update(JogoDTO jogo);
         Task Delete(JogoDTO jogo);
         Task<List<JogoDTO>> GetJogos();
+        Task<List<JogoDTO>> GetJogoById(int jogoID);
         Task<List<JogoDTO>> GetJogosByGenero(int generoID);
         Task<List<JogoDTO>> GetJogosByDesenvolvedor(int desenvolvedorID);
     }
