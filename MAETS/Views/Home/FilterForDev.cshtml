@@ -1,14 +1,11 @@
-﻿@model IEnumerable<MVCWebPresentationLayer.Models.Insert.JogoInsertViewModel>
+﻿@model IEnumerable<MVCWebPresentationLayer.Models.Query.FiltroViewModel>
 
 @{
     ViewData["Title"] = "FilterForDev";
 }
 
-<h1>FilterForDev</h1>
+<h1 style="text-align:center">Clique no nome do jogo para compra-lo.</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -19,13 +16,13 @@
                 @Html.DisplayNameFor(model => model.Preco)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Calssificacao)
+                @Html.DisplayNameFor(model => model.Classificacao)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DesenvolvedorDTOID)
+                @Html.DisplayNameFor(model => model.DesenvolvedorDTONome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GeneroDTOID)
+                @Html.DisplayNameFor(model => model.GeneroDTONome)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DataLancamento)
@@ -37,35 +34,31 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Preco)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Calssificacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DesenvolvedorDTOID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GeneroDTOID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataLancamento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Especificacoes)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.Nome, "ComprarJogo", "Compra", routeValues: new { jogoID = item.ID }, htmlAttributes: null)
+                </td>
+                <td>
+                    <span>@item.Preco R$</span>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Classificacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DesenvolvedorDTONome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GeneroDTONome)
+                </td>
+                <td>
+                    <span>@item.DataLancamento.ToString("dd/MM/yyyy")</span>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Especificacoes)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

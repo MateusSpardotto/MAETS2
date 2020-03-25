@@ -47,6 +47,10 @@ namespace BLL.Impl
         {
             return await _jogorepository.GetJogosByDesenvolvedor(desenvolvedorID);
         }
+        public async Task<List<JogoDTO>> GetJogoById(int jogoID)
+        {
+            return await _jogorepository.GetJogoById(jogoID);
+        }
 
         public Task Update(JogoDTO jogo)
         {

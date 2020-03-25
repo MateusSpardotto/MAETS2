@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<MVCWebPresentationLayer.Models.Query.FiltroViewModel>
 
 @{
-    ViewData["Title"] = "FilterForGen";
+    ViewData["Title"] = "ComprarJogo";
 }
 
-<h1 style="text-align:center">Clique no nome do jogo para compra-lo.</h1>
+<h1>Comprar Jogo</h1>
 
 <table class="table">
     <thead>
@@ -38,7 +38,7 @@
         {
             <tr>
                 <td>
-                    @Html.ActionLink(item.Nome, "ComprarJogo", "Compra", routeValues: new { jogoID = item.ID }, htmlAttributes: null)
+                    @Html.DisplayFor(modelItem => item.Nome)
                 </td>
                 <td>
                     <span>@item.Preco R$</span>
@@ -62,3 +62,7 @@
         }
     </tbody>
 </table>
+
+<form method="post" asp-controller="Home" asp-action="Index">
+    <input type="submit" value="Comprar" id="Teste" class="btn btn-primary" />
+</form>

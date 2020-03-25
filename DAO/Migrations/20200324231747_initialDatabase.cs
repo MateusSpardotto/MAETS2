@@ -44,6 +44,7 @@ namespace DAO.Migrations
                     Email = table.Column<string>(unicode: false, nullable: true),
                     Senha = table.Column<string>(unicode: false, nullable: true),
                     CPF = table.Column<string>(unicode: false, nullable: true),
+                    Saldo = table.Column<double>(nullable: false),
                     Pais = table.Column<int>(nullable: false),
                     DataNascimento = table.Column<DateTime>(nullable: false),
                     TipoUsuario = table.Column<int>(nullable: false)
@@ -61,7 +62,7 @@ namespace DAO.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(unicode: false, nullable: true),
                     Preco = table.Column<double>(nullable: false),
-                    Calssificacao = table.Column<int>(nullable: false),
+                    Classificacao = table.Column<int>(nullable: false),
                     DesenvolvedorDTOID = table.Column<int>(nullable: false),
                     GeneroDTOID = table.Column<int>(nullable: false),
                     DataLancamento = table.Column<DateTime>(nullable: false),

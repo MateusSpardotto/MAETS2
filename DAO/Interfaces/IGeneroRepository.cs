@@ -12,5 +12,6 @@ namespace DAO.Interfaces
         Task Update(GeneroDTO genero);
         Task Delete(GeneroDTO genero);
         Task<List<GeneroDTO>> GetGeneros();
+        Task<string> GetGeneroById(int GeneroId);
     }
 }

@@ -65,14 +65,28 @@ namespace MAETS.Controllers
         public async Task<IActionResult> FilterForGen(int generoID)
          {
             List<JogoDTO> jogosDTO = await _jogoService.GetJogosByGenero(generoID);
-            List<JogoInsertViewModel> jogosView = jogosDTO.ToViewModel<JogoDTO, JogoInsertViewModel>();
+            List<FiltroViewModel> jogosView = jogosDTO.ToViewModel<JogoDTO, FiltroViewModel>();
+
+            for (int i = 0; i < jogosView.Count; i++)
+            {
+                jogosView[i].DesenvolvedorDTONome = await _desenvolvedorService.GetDesenvolvedorById(jogosDTO[i].DesenvolvedorDTOID);
+                jogosView[i].GeneroDTONome = await _generoService.GetGeneroById(jogosDTO[i].GeneroDTOID);
+            }
+
             return View(jogosView);
         }
 
         public async Task<IActionResult> FilterForDev(int desenvolvedorID)
         {
             List<JogoDTO> jogosDTO = await _jogoService.GetJogosByDesenvolvedor(desenvolvedorID);
-            List<JogoInsertViewModel> jogosView = jogosDTO.ToViewModel<JogoDTO, JogoInsertViewModel>();
+            List<FiltroViewModel> jogosView = jogosDTO.ToViewModel<JogoDTO, FiltroViewModel>();
+
+            for (int i = 0; i < jogosView.Count; i++)
+            {
+                jogosView[i].DesenvolvedorDTONome = await _desenvolvedorService.GetDesenvolvedorById(jogosDTO[i].DesenvolvedorDTOID);
+                jogosView[i].GeneroDTONome = await _generoService.GetGeneroById(jogosDTO[i].GeneroDTOID);
+            }
+
             return View(jogosView);
         }
     }

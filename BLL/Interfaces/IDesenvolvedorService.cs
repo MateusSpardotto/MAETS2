@@ -12,6 +12,6 @@ namespace DAO.Interfaces
         Task Update(DesenvolvedorDTO desenvolvedor);
         Task Delete(DesenvolvedorDTO desenvolvedor);
         Task<List<DesenvolvedorDTO>> GetDesenvolvedores();
-
+        Task<string> GetDesenvolvedorById(int desebvolvedorId);
     }
 }

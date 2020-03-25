@@ -40,6 +40,12 @@ namespace DAO
             }
         }
 
+        public async Task<string> GetDesenvolvedorById(int desebvolvedorId)
+        {
+            DesenvolvedorDTO DbD = await _context.Desenvolvedoras.FirstOrDefaultAsync(u => u.ID == desebvolvedorId);
+            return  DbD.Nome;
+        }
+
         public async Task<List<DesenvolvedorDTO>> GetDesenvolvedores()
         {
             return await _context.Desenvolvedoras.ToListAsync();

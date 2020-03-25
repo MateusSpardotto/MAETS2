@@ -24,6 +24,10 @@ namespace MVCWebPresentationLayer.Models.Insert
         [DisplayName("Tipo de Usuário")]
         public TipoUsuario TipoUsuario { get; set; }
 
+        [DisplayName("Saldo")]
+        [Required(ErrorMessage = "O saldo deve ser informado.")]
+        public double Saldo { get; set; }
+
         [DisplayName("País")]
         [Required(ErrorMessage = "O Pais deve ser selecionado.")]
         public Paises Pais { get; set; }
