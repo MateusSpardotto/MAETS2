@@ -1,0 +1,17 @@
+﻿@model MVCWebPresentationLayer.Models.Insert.UsuarioInsertViewModel
+@{
+    ViewData["Title"] = "Carteira";
+}
+
+<h1 style="color:#ffff">Carteira</h1>
+<div class="form-row">
+    <div class="col-md-4">
+        <form asp-action="Post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Saldo" class="text-danger" style="color:#ffff"></label>
+                <output></output>
+            </div>
+        </form>
+    </div>
+</div>
