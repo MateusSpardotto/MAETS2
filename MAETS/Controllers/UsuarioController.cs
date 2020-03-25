@@ -64,7 +64,7 @@ namespace MVCWebPresentationLayer.Controllers
                 ViewBag.ErrorMessage = ex.Message;
             }
 
-            return View();
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult Create()

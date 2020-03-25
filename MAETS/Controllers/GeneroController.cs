@@ -41,7 +41,7 @@ namespace MVCWebPresentationLayer.Controllers.Genero
                 GeneroDTO genero = mapper.Map<GeneroDTO>(viewModel);
                 await _generoService.Create(genero);
 
-                return View();
+                return RedirectToAction("Index", "Home");
             }
             catch (MSException ex)
             {

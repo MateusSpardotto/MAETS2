@@ -4,7 +4,7 @@
     ViewData["Title"] = "FilterForGen";
 }
 
-<h1 style="text-align:center">Clique no nome do jogo para compra-lo.</h1>
+<h1 style="text-align:center">Lista de jogos.</h1>
 
 <table class="table">
     <thead>
@@ -38,7 +38,7 @@
         {
             <tr>
                 <td>
-                    @Html.ActionLink(item.Nome, "ComprarJogo", "Compra", routeValues: new { jogoID = item.ID }, htmlAttributes: null)
+                    @Html.DisplayFor(modelItem => item.Nome)
                 </td>
                 <td>
                     <span>@item.Preco R$</span>
