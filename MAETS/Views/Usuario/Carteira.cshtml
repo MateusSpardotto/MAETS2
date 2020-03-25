@@ -1,17 +1,41 @@
-﻿@model MVCWebPresentationLayer.Models.Insert.UsuarioInsertViewModel
+﻿@model IEnumerable<MVCWebPresentationLayer.Models.Query.CarteiraQueryViewModel>
+
 @{
-    ViewData["Title"] = "Carteira";
+    ViewData["Title"] = "View";
 }
 
-<h1 style="color:#ffff">Carteira</h1>
-<div class="form-row">
-    <div class="col-md-4">
-        <form asp-action="Post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Saldo" class="text-danger" style="color:#ffff"></label>
-                <output></output>
-            </div>
-        </form>
-    </div>
-</div>
+<h1>Sua Carteira</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeUsuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Saldo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeUsuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Saldo)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+ }
+    </tbody>
+</table>
