@@ -40,7 +40,7 @@ namespace MVCWebPresentationLayer.Controllers
                 DesenvolvedorDTO desenvolvedor = mapper.Map<DesenvolvedorDTO>(viewModel);
                 await _desenvolvedorService.Create(desenvolvedor);
 
-                return View();
+                return RedirectToAction("Index", "Home");
             }
             catch (MSException ex)
             {

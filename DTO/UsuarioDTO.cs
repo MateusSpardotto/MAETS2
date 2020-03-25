@@ -12,7 +12,6 @@ namespace DTO
         public string Email { get; set; }
         public string Senha { get; private set; }
         public string CPF { get; set; }
-        public double Saldo { get; set; }
         public Paises Pais { get; set; }
         public DateTime DataNascimento { get; set; }
         public TipoUsuario TipoUsuario { get; set; }

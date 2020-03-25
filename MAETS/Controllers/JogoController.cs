@@ -60,6 +60,8 @@ namespace MVCWebPresentationLayer.Controllers
                 IMapper mapperJogo = configurationJogo.CreateMapper();
                 JogoDTO jogo = mapperJogo.Map<JogoDTO>(viewModel);
                 await _jogoService.Create(jogo);
+
+                return RedirectToAction("Index", "Home");
             }
             catch (MSException ex)
             {
@@ -70,7 +72,7 @@ namespace MVCWebPresentationLayer.Controllers
                 ViewBag.ErrorMessage = ex.Message;
             }
 
-            return RedirectToAction("Index", "Home");
+            return View();
         }
 
         public async Task<IActionResult> Create()

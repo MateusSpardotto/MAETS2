@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAO.Migrations
 {
     [DbContext(typeof(MContext))]
-    [Migration("20200324231747_initialDatabase")]
+    [Migration("20200325191224_initialDatabase")]
     partial class initialDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -119,9 +119,6 @@ namespace DAO.Migrations
 
                     b.Property<int>("Pais")
                         .HasColumnType("int");
-
-                    b.Property<double>("Saldo")
-                        .HasColumnType("float");
 
                     b.Property<string>("Senha")
                         .HasColumnType("varchar(max)")

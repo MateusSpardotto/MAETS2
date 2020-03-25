@@ -44,7 +44,6 @@ namespace DAO.Migrations
                     Email = table.Column<string>(unicode: false, nullable: true),
                     Senha = table.Column<string>(unicode: false, nullable: true),
                     CPF = table.Column<string>(unicode: false, nullable: true),
-                    Saldo = table.Column<double>(nullable: false),
                     Pais = table.Column<int>(nullable: false),
                     DataNascimento = table.Column<DateTime>(nullable: false),
                     TipoUsuario = table.Column<int>(nullable: false)
