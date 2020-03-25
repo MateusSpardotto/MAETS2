@@ -17,6 +17,5 @@ namespace DTO
         public DateTime DataNascimento { get; set; }
         public TipoUsuario TipoUsuario { get; set; }
         public virtual ICollection<UsuarioDTO_JogoDTO> Jogos { get; set; }
-        public double Carteira { get; private set; }
     }
 }
