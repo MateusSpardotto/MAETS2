@@ -118,6 +118,9 @@ namespace DAO.Migrations
                     b.Property<int>("Pais")
                         .HasColumnType("int");
 
+                    b.Property<double>("Saldo")
+                        .HasColumnType("float");
+
                     b.Property<string>("Senha")
                         .HasColumnType("varchar(max)")
                         .IsUnicode(false);
